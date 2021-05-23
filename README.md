@@ -9,6 +9,8 @@
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
 - [Git](#git)
+  - [MacOS password requests](#macos-password-requests)
+  - [Quick reference](#quick-reference)
 - [Markdown](#markdown)
   - [Images](#images)
 - [Bash Scripting](#bash-scripting)
@@ -47,11 +49,21 @@ $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 [Step-by-Step info for MacOS](https://siytek.com/ubuntu-mac-virtualbox/)
 
 # Git
+## MacOS password requests
 * Git keeps prompting me for user name and password every time
 [credit](https://stackoverflow.com/questions/7773181/git-keeps-prompting-me-for-a-password)
 Configuring credential.helper: On OS X (now macOS), run this in Terminal:
 `git config --global credential.helper osxkeychain`
 When pushing/pulling for the first time after that, reply always in keychain popup window
+## Quick reference
+* create new repository on githup, copy address and run in local directory git pull "GitHub URL"
+* mess with data locally, then in local terminal run the following:
+* git status
+* git add .
+* git status
+* git commit -m ""Here is what was done""
+* git push
+
 
 # Markdown
 * Ctrl+K,V open preview to the right
