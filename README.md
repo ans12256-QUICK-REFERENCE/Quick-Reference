@@ -63,7 +63,7 @@ When pushing/pulling for the first time after that, reply always in keychain pop
 * git status
 * git commit -m ""Here is what was done""
 * git push
-``` Navigate back to TOC Ctrl+Up ```
+* To navigate back to TOC above, `Ctrl+Up`
 
 
 # Markdown
