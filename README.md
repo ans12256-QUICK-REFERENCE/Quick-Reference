@@ -12,6 +12,7 @@
   - [MacOS password requests](#macos-password-requests)
   - [Quick reference](#quick-reference)
 - [Markdown](#markdown)
+  - [Syntax, LaTex](#syntax-latex)
   - [Images](#images)
 - [Bash Scripting](#bash-scripting)
     - [make a bash function](#make-a-bash-function)
@@ -20,6 +21,7 @@
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [Syntax](#syntax)
   - [Data wrangling](#data-wrangling)
     - [Space separated numerical data](#space-separated-numerical-data)
   - [Jupyter Notebooks](#jupyter-notebooks)
@@ -36,6 +38,7 @@
 - [Sorting Algorithms](#sorting-algorithms)
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
+  - [Font Sizes](#font-sizes)
 - [Derivations](#derivations)
 
 ## Relevant Links
@@ -69,6 +72,13 @@ When pushing/pulling for the first time after that, reply always in keychain pop
 
 
 # Markdown
+## Syntax, LaTex
+* new line `<br />` [credit](https://stackoverflow.com/questions/24575680/new-lines-inside-paragraph-in-readme-md)
+* Greek letters `$\tau$` $\tau$, `$\theta$` $\theta$ [credit](https://stackoverflow.com/questions/54698075/how-do-i-print-greek-letters-in-jupyter)
+* Font size `\Huge, \huge, \Large, \large` [credit](https://texblog.org/2012/08/29/changing-the-font-size-in-latex/)
+* `$\frac{n!}{k!(n-k)!}$` $\frac{n!}{k!(n-k)!}$ [credit](https://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/)
+* $\Huge \frac{n!}{k!(n-k)!}$ `\Huge`
+
 * Ctrl+K,V open preview to the right
 [Marketplace URL](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
 ![Markdown Preview Enhanced Extension](images/Marketplace_Markdown_Preview_Enhanced.png)
@@ -155,6 +165,15 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## Syntax
+* typing — Support for type hints [credit](https://docs.python.org/3/library/typing.html)
+`def greeting(name: str) -> str:` <br />
+`    return 'Hello ' + name`
+* formatting
+```
+print("Sample Mean: {0:1.3f}".format(mu_hat))
+Sample Mean: -0.159
+  ```
 ## Data wrangling
 ### Space separated numerical data
 [credit](https://stackoverflow.com/questions/19555472/change-a-string-of-integers-separated-by-spaces-to-a-list-of-int)
@@ -169,7 +188,7 @@ data = [-0.24525234  0.34258838  0.66512235 -2.15445321  1.30069225  0.42041963
   1.37490091 -0.72273023 -0.68162468  0.01836007  0.71899727 -0.86227295
  -0.04175399 -0.21037323]
  Not very useful, do this:
- * Chage text to a string (add line continuation "\" at each line), replace closing "]" with " at the last line to create a long string
+ * Chage text to a string (add line continuation `\` at each line), replace closing `]` with `"` at the last line to create a long string
  * rename to data_s
  * split, and convert to a numerical list using list comprehension:
  data_s = "-0.24525234  0.34258838  0.66512235 -2.15445321  1.30069225  0.42041963 \
@@ -247,7 +266,18 @@ A Credit (Everett Schroeder):
 # library call
 ```
 # `matplotlib.pyplot` visualizations
-
+## Font Sizes
+[credit](https://www.statology.org/change-font-size-matplotlib/)
+* How to Change Font Sizes on a Matplotlib Plot
+```
+import matplotlib.pyplot as plt
+plt.rc('font', size=10) #controls default text size
+plt.rc('axes', titlesize=10) #fontsize of the title
+plt.rc('axes', labelsize=10) #fontsize of the x and y labels
+plt.rc('xtick', labelsize=10) #fontsize of the x tick labels
+plt.rc('ytick', labelsize=10) #fontsize of the y tick labels
+plt.rc('legend', fontsize=10) #fontsize of the legend
+```
 -----------------
 # Derivations
 * [Derivation of Perceptron with LaTEX](https://github.com/ans12256/DSI_Galvanize_May_17_2021/blob/15b601cbd579136a87e1cef08c78a4b8000583aa/notebooks/derivation_of_a_perceptron.ipynb)
