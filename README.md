@@ -22,6 +22,9 @@
   - [!49 Participants](#)
 - [Python](#python)
   - [Syntax](#syntax)
+    - [Type Hints](#type-hints)
+    - [Formatting](#formatting)
+    - [Nested Loop with product](#nested-loop-with-product)
   - [Data wrangling](#data-wrangling)
     - [Space separated numerical data](#space-separated-numerical-data)
   - [Jupyter Notebooks](#jupyter-notebooks)
@@ -166,14 +169,39 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ---------------------------------
 # Python
 ## Syntax
+### Type Hints
 * typing — Support for type hints [credit](https://docs.python.org/3/library/typing.html)
 `def greeting(name: str) -> str:` <br />
 `    return 'Hello ' + name`
+### Formatting
 * formatting
 ```
 print("Sample Mean: {0:1.3f}".format(mu_hat))
 Sample Mean: -0.159
   ```
+### Nested Loop with product
+* for mu, sigma_sq in product([-1, 0, 1], [0.5, 1, 2]):
+```
+from itertools import product
+
+for mu, sigma_sq in product([-1, 0, 1], [0.5, 1, 2]):
+    print("Log-Lik of Two Parameter Normal Model With mu={0}, sigma_sq={1}: {2:3.2f}".format(
+        mu, sigma_sq, log_likelihood_normal_two_parameters(mu, sigma_sq, data))
+    )
+
+Log-Lik of Two Parameter Normal Model With mu=-1, sigma_sq=0.5: -102.05
+Log-Lik of Two Parameter Normal Model With mu=-1, sigma_sq=1: -82.66
+Log-Lik of Two Parameter Normal Model With mu=-1, sigma_sq=2: -81.63
+Log-Lik of Two Parameter Normal Model With mu=0, sigma_sq=0.5: -52.85
+Log-Lik of Two Parameter Normal Model With mu=0, sigma_sq=1: -58.06
+Log-Lik of Two Parameter Normal Model With mu=0, sigma_sq=2: -69.33
+Log-Lik of Two Parameter Normal Model With mu=1, sigma_sq=0.5: -103.64
+Log-Lik of Two Parameter Normal Model With mu=1, sigma_sq=1: -83.46
+Log-Lik of Two Parameter Normal Model With mu=1, sigma_sq=2: -82.03
+
+```
+
+
 ## Data wrangling
 ### Space separated numerical data
 [credit](https://stackoverflow.com/questions/19555472/change-a-string-of-integers-separated-by-spaces-to-a-list-of-int)
