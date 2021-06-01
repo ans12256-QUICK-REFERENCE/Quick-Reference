@@ -25,6 +25,7 @@
     - [Type Hints](#type-hints)
     - [Formatting](#formatting)
     - [Nested Loop with product](#nested-loop-with-product)
+    - [Saving pictures](#saving-pictures)
   - [Data wrangling](#data-wrangling)
     - [Space separated numerical data](#space-separated-numerical-data)
   - [Jupyter Notebooks](#jupyter-notebooks)
@@ -200,6 +201,8 @@ Log-Lik of Two Parameter Normal Model With mu=1, sigma_sq=1: -83.46
 Log-Lik of Two Parameter Normal Model With mu=1, sigma_sq=2: -82.03
 
 ```
+### Saving pictures
+`plt.savefig('../images/hist_plot1.png')`
 
 
 ## Data wrangling
