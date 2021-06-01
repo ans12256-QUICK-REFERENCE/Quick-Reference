@@ -8,6 +8,7 @@
   - [Following steps in](#following-steps-in)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
+- [SQL](#sql)
 - [Git](#git)
   - [MacOS password requests](#macos-password-requests)
   - [Quick reference](#quick-reference)
@@ -56,6 +57,23 @@ Does not render in GitHub !
 $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 * VirtualBoxVM on MacOS for Ubuntu installation instructions:
 [Step-by-Step info for MacOS](https://siytek.com/ubuntu-mac-virtualbox/)
+
+# SQL
+* ROUND to 1000
+ ```
+SELECT name, population AS "POP", ROUND(gnp, -3)
+FROM country
+WHERE continent = 'South America' AND gnp > 0
+ORDER BY population ASC;
+ ```
+ * CASE WHEN
+```
+SELECT name,
+       CASE WHEN continent='Caribbean' THEN 'North America'
+            ELSE continent END
+FROM country
+WHERE name LIKE 'J%';
+```
 
 # Git
 ## MacOS password requests
