@@ -1,11 +1,7 @@
 # DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
-## Following steps in
-* [Setting up DSI notes] (https://www.youtube.com/watch?t=4722&v=W5kZjp2uh8M&feature=youtu.be)
-
 # Table of Contents
-`Markdown All in One, Ctrl+Shift+P, Create table of contents`
+`Markdown All in One, Command+Shift+P, Create table of contents`- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
-  - [Following steps in](#following-steps-in)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
 - [SQL](#sql)
@@ -35,7 +31,8 @@
   - [Comprehensions](#comprehensions)
   - [functions to remember](#functions-to-remember)
 - [Pandas](#pandas)
-  - [Loading large datasets in Pandas](#loading-large-datasets-in-pandas)
+  - [Data checks](#data-checks)
+  - [Data extraction](#data-extraction)
   - [Machine Learning Workflow](#machine-learning-workflow)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
@@ -288,6 +285,65 @@ def factorial(n):
 Q: Is there a way to estimate sie of data before loading to prevent crash?
 A Credit (Everett Schroeder):
 [Loading large datasets in Pandas](https://towardsdatascience.com/loading-large-datasets-in-pandas-11bdddd36f7b)
+
+## Data checks
+* Show non NaNs in a column
+`df['Verified Date'].dropna().head`
+* Multi_index
+```
+payments_this_month.loc[payments_this_month.index.get_level_values(1).isin(active_loan_ids), :]
+
+all_payments.loc[pd.IndexSlice[:, loan_ids_from_training_set], :][cols]
+```
+## Data extraction
+```
+In [26]: df2c
+Out[26]:
+Return Year  Species
+1976         Chinook      14482
+             Chum             5
+             Coho         21934
+1977         Chinook       9913
+             Chum             4
+                          ...
+2020         Coho         14245
+             Steelhead       12
+             Unknown          4
+2021         Chinook         33
+             Steelhead        1
+Length: 211, dtype: int64
+# ======
+In [27]: df2c.reset_index()
+Out[27]:
+     Return Year    Species      0
+0           1976    Chinook  14482
+1           1976       Chum      5
+2           1976       Coho  21934
+3           1977    Chinook   9913
+4           1977       Chum      4
+..           ...        ...    ...
+206         2020       Coho  14245
+207         2020  Steelhead     12
+208         2020    Unknown      4
+209         2021    Chinook     33
+210         2021  Steelhead      1
+
+[211 rows x 3 columns]
+# ==========
+In [30]: df_tmp = df2c.reset_index()
+
+In [31]: df_tmp[df_tmp['Species'] == 'Coho']
+Out[31]:
+     Return Year Species       0
+2           1976    Coho   21934
+5           1977    Coho   25826
+9           1978    Coho   20836
+13          1979    Coho   25235
+18          1980    Coho   39638
+...
+202         2019    Coho   43973
+206         2020    Coho   14245
+```
 ---------------------------
 
 ## Machine Learning Workflow
