@@ -24,6 +24,8 @@
     - [Nested Loop with product](#nested-loop-with-product)
     - [Saving pictures](#saving-pictures)
   - [Data wrangling](#data-wrangling)
+    - [Basic python loop](#basic-python-loop)
+    - [Split](#split)
     - [Space separated numerical data](#space-separated-numerical-data)
   - [Jupyter Notebooks](#jupyter-notebooks)
     - [jup shortcut (credit: Hamid)](#jup-shortcut-credit-hamid)
@@ -40,6 +42,8 @@
 - [Sorting Algorithms](#sorting-algorithms)
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
+  - [Subplots](#subplots)
+  - [Single letter legend](#single-letter-legend)
   - [Font Sizes](#font-sizes)
 - [Derivations](#derivations)
 
@@ -221,6 +225,53 @@ Log-Lik of Two Parameter Normal Model With mu=1, sigma_sq=2: -82.03
 
 
 ## Data wrangling
+### Basic python loop
+'''
+def two_lst_intersec(lst1=[], lst2=[]):
+    '''
+    Return intersection of arr1 and arr2, unique elements only
+
+    '''
+    lst3 = [] # initialize intersection
+
+    for i in lst1: # loop through 1st array
+        if (i in lst2 and i not in lst3):
+            lst3.append(i)
+
+
+    return lst3
+'''
+### Split
+* Create list from a string, or split string:
+'''
+emails = "ase@gmail.com, am@comcast.net, cbd@gmail.com, are@hotmail.com, yahoo@hotmail.com, col@yahoo.com,\
+            inte@comcast.net, gmail.info@gmail.com, por@hotmail.com, crt@comcast.net, gbm@sbcglobal.net, arc@gmail.com,\
+            mail@gmail.com, ant@hotmail.com, mod@yahoo.com, fli@comcast.net, qrc.net@gmail.com, mail@yahoo.com,\
+            ure@comcast.net, com@gmail.com, re@comcast.net, email@qq.net, info@yahoo.com, text.com@sbcglobal.net"
+def email_domains_dict(email_str: str):
+    '''
+    Split email string into a dictionary of
+    {'@gmail.com': [ase, am, person5], '@msn.com': [Jon5]} etc.
+    '''
+    # Split string into a list
+    tmp = emails.split(sep=",") # split string in a list ['email1', 'email2', etc.]
+
+    # Initiate collection dictionary
+    emails_dict = {}
+
+    for i in tmp:
+        [alias, domain] = i.split(sep='@')
+
+        if domain in emails_dict: # append alias to values
+            emails_dict[domain].append(alias)
+        else:  # new domain found
+            emails_dict[domain] = [alias] # create new key, AND populate with a list with an alias
+
+    # strip spaces
+
+
+    return emails_dict
+'''
 ### Space separated numerical data
 [credit](https://stackoverflow.com/questions/19555472/change-a-string-of-integers-separated-by-spaces-to-a-list-of-int)
 Say you are supposed to use data that looks like print output like this:
@@ -371,6 +422,20 @@ Out[31]:
 # library call
 ```
 # `matplotlib.pyplot` visualizations
+## Subplots
+[subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)
+```
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.plot(x, y)
+ax.set_title('Simple plot')
+
+
+```
+## Single letter legend
+[Ref1](https://stackoverflow.com/questions/10557614/matplotlib-figlegend-only-printing-first-letter)
+[Ref2](https://stackoverflow.com/questions/44632571/pyplot-legend-only-displaying-one-letter)
+[Ref3]()
+For the names of the legend, you have to surround it in square brackets
 ## Font Sizes
 [credit](https://www.statology.org/change-font-size-matplotlib/)
 * How to Change Font Sizes on a Matplotlib Plot
