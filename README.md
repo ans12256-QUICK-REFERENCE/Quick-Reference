@@ -226,7 +226,7 @@ Log-Lik of Two Parameter Normal Model With mu=1, sigma_sq=2: -82.03
 
 ## Data wrangling
 ### Basic python loop
-'''
+```
 def two_lst_intersec(lst1=[], lst2=[]):
     '''
     Return intersection of arr1 and arr2, unique elements only
@@ -240,10 +240,10 @@ def two_lst_intersec(lst1=[], lst2=[]):
 
 
     return lst3
-'''
+```
 ### Split
 * Create list from a string, or split string:
-'''
+```
 emails = "ase@gmail.com, am@comcast.net, cbd@gmail.com, are@hotmail.com, yahoo@hotmail.com, col@yahoo.com,\
             inte@comcast.net, gmail.info@gmail.com, por@hotmail.com, crt@comcast.net, gbm@sbcglobal.net, arc@gmail.com,\
             mail@gmail.com, ant@hotmail.com, mod@yahoo.com, fli@comcast.net, qrc.net@gmail.com, mail@yahoo.com,\
@@ -271,7 +271,7 @@ def email_domains_dict(email_str: str):
 
 
     return emails_dict
-'''
+```
 ### Space separated numerical data
 [credit](https://stackoverflow.com/questions/19555472/change-a-string-of-integers-separated-by-spaces-to-a-list-of-int)
 Say you are supposed to use data that looks like print output like this:
