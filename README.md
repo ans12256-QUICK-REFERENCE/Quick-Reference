@@ -1,6 +1,6 @@
 # DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 # Table of Contents
-`Markdown All in One, Command+Shift+P, Create table of contents`- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
+`Markdown All in One, Command+Shift+P, Create table of contents`- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
@@ -18,6 +18,7 @@
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
   - [Syntax](#syntax)
     - [Type Hints](#type-hints)
     - [Formatting](#formatting)
@@ -42,6 +43,8 @@
 - [Sorting Algorithms](#sorting-algorithms)
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
+  - [Color style](#color-style)
+  - [Color cycler](#color-cycler)
   - [Subplots](#subplots)
   - [Single letter legend](#single-letter-legend)
   - [Font Sizes](#font-sizes)
@@ -188,6 +191,20 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## Debugging print as a function of variable
+[Credit](https://stackoverflow.com/questions/6579496/using-print-statements-only-to-debug)
+```DEBUG = True
+
+def log(s):
+    if DEBUG:
+        print s
+
+log("hello world")
+```
+Then you can change the value of DEBUG and run your code with or without logging.
+
+The standard logging module has a more elaborate mechanism for this.
+
 ## Syntax
 ### Type Hints
 * typing — Support for type hints [credit](https://docs.python.org/3/library/typing.html)
@@ -422,6 +439,19 @@ Out[31]:
 # library call
 ```
 # `matplotlib.pyplot` visualizations
+## Color style
+[Ref.](https://matplotlib.org/stable/gallery/style_sheets/ggplot.html)
+`plt.style.use('ggplot')`
+## Color cycler
+[Ref.](https://stackoverflow.com/questions/53521396/how-to-implement-automatic-color-change-in-matplotlib-with-subplots)
+```
+colors = plt.rcParams["axes.prop_cycle"]()
+...
+# Get the next color from the cycler
+c = next(colors)["color"]
+...
+ax.plot(x, y, label=label, color=c)
+```
 ## Subplots
 [subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)
 ```
