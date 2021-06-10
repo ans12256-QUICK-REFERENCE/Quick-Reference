@@ -1,11 +1,14 @@
 # DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
+`Markdown All in One, Command+Shift+P, Create table of contents`
+
 # Table of Contents
-`Markdown All in One, Command+Shift+P, Create table of contents`- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
+[DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
 - [SQL](#sql)
 - [Git](#git)
+  - [Huge files headache](#huge-files-headache)
   - [MacOS password requests](#macos-password-requests)
   - [Quick reference](#quick-reference)
 - [Markdown](#markdown)
@@ -80,6 +83,28 @@ WHERE name LIKE 'J%';
 ```
 
 # Git
+## Huge files headache
+[Ref.1 stackoverflow.com](https://stackoverflow.com/questions/33360043/git-error-need-to-remove-large-file)
+```
+$ git rm --cached giant_file
+# Stage our giant file for removal, but leave it on disk
+
+git commit --amend -CHEAD
+# Amend the previous commit with your change
+# Simply making a new commit won't work, as you need
+# to remove the file from the unpushed history as well
+
+git push
+# Push our rewritten, smaller commit
+```
+* If several commits behind, find how many by `git status`. Say you are 4 (four) commits behind, since you tried to push with errors, and kept `git add .` and then `git push` with errors resulting in 4(four) unsuccessful commits. Type `git reset --soft HEAD~4`, where `~4` is the number of failed commits.
+If everything else fails, make a copy of your current directory, do `git reset --hard HEAD`, `git pull`, update `.gitignore` or `exclude` to remove huge data file from git, move new/changed files from a copy directory, and try to do it all over again - `git add .`, `git commit -m "Meaningful message"`, and finally `git push` while keeping your fingers crossed.
+
+[Ref.2 docs.github.com](https://docs.github.com/en/github/getting-started-with-github/getting-started-with-git/ignoring-files#excluding-local-files-without-creating-a-gitignore-file)
+* [Excluding local files without creating a .gitignore file](https://docs.github.com/en/github/getting-started-with-github/getting-started-with-git/ignoring-files#excluding-local-files-without-creating-a-gitignore-file)
+  `.git/info/exclude`
+  *[Configuring ignored files for a single repository](https://docs.github.com/en/github/getting-started-with-github/getting-started-with-git/ignoring-files#configuring-ignored-files-for-a-single-repository)
+  `touch .gitignore`
 ## MacOS password requests
 * Git keeps prompting me for user name and password every time
 [credit](https://stackoverflow.com/questions/7773181/git-keeps-prompting-me-for-a-password)
@@ -364,6 +389,22 @@ payments_this_month.loc[payments_this_month.index.get_level_values(1).isin(activ
 all_payments.loc[pd.IndexSlice[:, loan_ids_from_training_set], :][cols]
 ```
 ## Data extraction
+### Syntax matters brackets positions[]
+* This does not work:
+`df_tmp[df_tmp['Species' == 'Coho']]`
+* This does:
+`df_tmp['Species'] == 'Coho'`
+In general try to separate filter creation in a separate line for code transparency sake. This works:
+
+```
+df_tmp[df_tmp['Species'] == 'Coho']
+```
+This reads better:
+```
+filter_bool = df_tmp['Species'] == 'Coho'
+df_tmp[filter_bool]
+```
+### Multiindex mess and reset_index()
 ```
 In [26]: df2c
 Out[26]:
