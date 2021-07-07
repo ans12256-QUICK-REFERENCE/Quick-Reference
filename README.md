@@ -1,6 +1,63 @@
 # DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
-`Markdown All in One, Command+Shift+P, Create table of contents`
-
+**Markdown Preview Enhanced**
+`Cmd+K, V` open preview side-by-side
+**Markdown All in One**
+`Command+Shift+P, Create table of contents`
+- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
+- [Table of Contents](#table-of-contents)
+  - [Relevant Links](#relevant-links)
+- [SQL](#sql)
+- [Git](#git)
+  - [Huge files headache](#huge-files-headache)
+  - [MacOS password requests](#macos-password-requests)
+  - [Quick reference](#quick-reference)
+- [Markdown](#markdown)
+  - [Syntax, LaTex](#syntax-latex)
+  - [Images](#images)
+- [Bash Scripting](#bash-scripting)
+    - [make a bash function](#make-a-bash-function)
+  - [Terminal tricks](#terminal-tricks)
+    - [recall line editing in terminal](#recall-line-editing-in-terminal)
+- [Zoom](#zoom)
+  - [!49 Participants](#)
+- [Python](#python)
+  - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
+  - [Syntax](#syntax)
+    - [Type Hints](#type-hints)
+    - [Formatting](#formatting)
+    - [Nested Loop with product](#nested-loop-with-product)
+    - [Saving pictures](#saving-pictures)
+  - [Data wrangling](#data-wrangling)
+    - [Basic python loop](#basic-python-loop)
+    - [Split](#split)
+    - [Space separated numerical data](#space-separated-numerical-data)
+  - [Jupyter Notebooks](#jupyter-notebooks)
+    - [jup shortcut (credit: Hamid)](#jup-shortcut-credit-hamid)
+    - [correct closure of notebooks](#correct-closure-of-notebooks)
+  - [Comprehensions](#comprehensions)
+  - [functions to remember](#functions-to-remember)
+- [Pandas](#pandas)
+  - [Visualizations](#visualizations)
+    - [Histograms of all columns](#histograms-of-all-columns)
+    - [Cross-correlation plot](#cross-correlation-plot)
+  - [Data checks](#data-checks)
+  - [Data extraction](#data-extraction)
+    - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
+    - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
+  - [Machine Learning Workflow](#machine-learning-workflow)
+    - [Cross Validation](#cross-validation)
+    - [k-fold Cross Validation](#k-fold-cross-validation)
+    - [Bootstrap](#bootstrap)
+- [Sorting Algorithms](#sorting-algorithms)
+  - [Bubble Sort](#bubble-sort)
+- [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
+  - [Show gray picture as gray](#show-gray-picture-as-gray)
+  - [Color style](#color-style)
+  - [Color cycler](#color-cycler)
+  - [Subplots](#subplots)
+  - [Single letter legend](#single-letter-legend)
+  - [Font Sizes](#font-sizes)
+- [Derivations](#derivations)
 # Table of Contents
 [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
@@ -37,8 +94,13 @@
   - [Comprehensions](#comprehensions)
   - [functions to remember](#functions-to-remember)
 - [Pandas](#pandas)
+  - [Visualizations](#visualizations)
+    - [Histograms of all columns](#histograms-of-all-columns)
+    - [Cross-correlation plot](#cross-correlation-plot)
   - [Data checks](#data-checks)
   - [Data extraction](#data-extraction)
+    - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
+    - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
   - [Machine Learning Workflow](#machine-learning-workflow)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
@@ -46,6 +108,7 @@
 - [Sorting Algorithms](#sorting-algorithms)
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
+  - [Show gray picture as gray](#show-gray-picture-as-gray)
   - [Color style](#color-style)
   - [Color cycler](#color-cycler)
   - [Subplots](#subplots)
@@ -375,9 +438,17 @@ def factorial(n):
 
 # Pandas
 * May 20, 2021 Comment was made during pandas lecture (Andrew Nicholls) - pandas load data in memory, and are therefore fast, BUT it becomes a liability for large datasets.
-Q: Is there a way to estimate sie of data before loading to prevent crash?
+Q: Is there a way to estimate size of data before loading to prevent crash?
 A Credit (Everett Schroeder):
 [Loading large datasets in Pandas](https://towardsdatascience.com/loading-large-datasets-in-pandas-11bdddd36f7b)
+
+## Visualizations
+### Histograms of all columns
+`df.hist(figsize=(15,15))
+plt.savefig(‘df_hist.pdf’, dpi=300)`
+### Cross-correlation plot
+`pd.plotting.scatter_matrix(df, figsize=(10,10)`
+
 
 ## Data checks
 * Show non NaNs in a column
@@ -480,6 +551,13 @@ Out[31]:
 # library call
 ```
 # `matplotlib.pyplot` visualizations
+## Show gray picture as gray
+```
+fig, ax = plt.subplots(1, 2, figsize=(15, 10))
+ax[0].imshow(img_np)
+ax[1].imshow(img_np_gr, cmap='gray')
+```
+
 ## Color style
 [Ref.](https://matplotlib.org/stable/gallery/style_sheets/ggplot.html)
 `plt.style.use('ggplot')`
