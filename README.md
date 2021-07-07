@@ -444,8 +444,10 @@ A Credit (Everett Schroeder):
 
 ## Visualizations
 ### Histograms of all columns
-`df.hist(figsize=(15,15))
-plt.savefig(‘df_hist.pdf’, dpi=300)`
+```
+df.hist(figsize=(15,15))
+plt.savefig(‘df_hist.pdf’, dpi=300)
+```
 ### Cross-correlation plot
 `pd.plotting.scatter_matrix(df, figsize=(10,10)`
 
