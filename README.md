@@ -2,10 +2,16 @@
 **Markdown Preview Enhanced**
 `Cmd+K, V` open preview side-by-side
 **Markdown All in One**
-`Command+Shift+P, Create table of contents`
+`Command+Shift+P, Create t- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
+- [Things that drive you NUTS !!!](#things-that-drive-you-nuts-)
+  - [Environments](#environments)
+    - [Activate my_environment:](#activate-my_environment)
+    - [Check for installed modules:](#check-for-installed-modules)
+  - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
+  - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
   - [Huge files headache](#huge-files-headache)
@@ -63,6 +69,12 @@
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
+- [Things that drive you NUTS !!!](#things-that-drive-you-nuts-)
+  - [Environments](#environments)
+    - [Activate my_environment:](#activate-my_environment)
+    - [Check for installed modules:](#check-for-installed-modules)
+  - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
+  - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
   - [Huge files headache](#huge-files-headache)
@@ -127,6 +139,50 @@ Does not render in GitHub !
 $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 * VirtualBoxVM on MacOS for Ubuntu installation instructions:
 [Step-by-Step info for MacOS](https://siytek.com/ubuntu-mac-virtualbox/)
+
+# Things that drive you NUTS !!!
+## Environments
+### Activate my_environment:
+`conda activate my_environment`
+### Check for installed modules:
+`conda list`
+## VS Code is using python 2.7 WTF ?!
+Control+` opens terminal, you type `python -V, and ... drum roll ...
+```
+(base) alexey_imac@ALEXEYs-iMac src % python -V
+Python 2.7.16
+```
+well you can activate your fancy-shmancy Machien Learning environment with TensorFlow 2 and shit, but ...
+```
+(base) alexey_imac@ALEXEYs-iMac src % conda activate tf2
+(tf2) alexey_imac@ALEXEYs-iMac src % python -V
+Python 2.7.16
+(tf2) alexey_imac@ALEXEYs-iMac src %
+```
+WTF ?!
+Well if you calm down and press Ctrl+Shift+P, if necessary type "Python: Select Interpreter", you will find out that unless specifically told to use one, VSCode just grabs the first thing to come along in the system path, in this case Python 2.7 !!!
+![Control+Shift+P](images/VSCode_Select_Python_1.png)
+![Control+Shift+P](images/VSCode_Select_Python_2.png)
+Sure enough ! How is VSCode supposed to read you MIND ?! It ain't that smart ... YET
+<font size="10">👽</font>
+The sad part selection does not stick. Once selected, check for nother Ctrl+Shift+P shows
+
+## Jupyter import error of installed module
+Jupyter packages installation problem follow up:
+Ref. https://github.com/jupyter/jupyter/issues/270
+To refresh, bs4 (BeautifulSoup), and a number of other packages would not be recognized in jupyter despite being explicitly installed in anaconda. Turns out the problem was that Jupyter was loading the wrong kernel (how and why do not care). Diagnostics can be performed as follows:
+(base) … % jupyter kernelspec list
+Available kernels:
+ python3  /Users/alexey_imac/Library/jupyter/kernels/python3
+if one gets output similar to shown above, not the one shown below with anaconda3, DESTROY python3 directory shown above by
+cd /Users/alexey_imac/Library/jupyter/kernels/python3
+cd ..
+rm -rf python3
+CORRECT OUTPUT for (base) … % jupyter kernelspec list
+python3  /Users/alexey_imac/opt/anaconda3/share/jupyter/kernels/python3
+re-check again(jupyter kernelspec list), jupyter should now locate correct anaconda3 branch of python3.
+Rer-launch jupyter notebook, and try to import modules that were not recognized before (In my case import bs4). Hopefully it would work now.
+There should be more elegant ways to force jupyter use correct kernel, datails are to be updated.
 
 # SQL
 * ROUND to 1000
