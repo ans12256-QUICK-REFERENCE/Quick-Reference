@@ -14,6 +14,9 @@
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
+  - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
+  - [.gitignore](#gitignore)
+  - [Correcting .gitignore mistakes](#correcting-gitignore-mistakes)
   - [Huge files headache](#huge-files-headache)
   - [MacOS password requests](#macos-password-requests)
   - [Quick reference](#quick-reference)
@@ -27,6 +30,8 @@
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [Iterate through two lists](#iterate-through-two-lists)
+  - [RAW string for path](#raw-string-for-path)
   - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
   - [Syntax](#syntax)
     - [Type Hints](#type-hints)
@@ -42,6 +47,8 @@
     - [correct closure of notebooks](#correct-closure-of-notebooks)
   - [Comprehensions](#comprehensions)
   - [functions to remember](#functions-to-remember)
+- [Numpy](#numpy)
+  - [Number of digits to print](#number-of-digits-to-print)
 - [Pandas](#pandas)
   - [Visualizations](#visualizations)
     - [Histograms of all columns](#histograms-of-all-columns)
@@ -77,6 +84,9 @@
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
+  - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
+  - [.gitignore](#gitignore)
+  - [Correcting .gitignore mistakes](#correcting-gitignore-mistakes)
   - [Huge files headache](#huge-files-headache)
   - [MacOS password requests](#macos-password-requests)
   - [Quick reference](#quick-reference)
@@ -90,6 +100,8 @@
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [Iterate through two lists](#iterate-through-two-lists)
+  - [RAW string for path](#raw-string-for-path)
   - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
   - [Syntax](#syntax)
     - [Type Hints](#type-hints)
@@ -105,6 +117,8 @@
     - [correct closure of notebooks](#correct-closure-of-notebooks)
   - [Comprehensions](#comprehensions)
   - [functions to remember](#functions-to-remember)
+- [Numpy](#numpy)
+  - [Number of digits to print](#number-of-digits-to-print)
 - [Pandas](#pandas)
   - [Visualizations](#visualizations)
     - [Histograms of all columns](#histograms-of-all-columns)
@@ -202,6 +216,21 @@ WHERE name LIKE 'J%';
 ```
 
 # Git
+## Listing Python, rather than Jupyter in Languages
+Pro tip: Go to your capstone repo and create a file called .gitattributes. The file should contain one line:
+`*.ipynb linguist-language=Python`
+This will cause GitHub to recognize your notebook coding language as Python instead of listing your repo's primary language as Jupyter Notebooks.
+Credit: [Andrew Nicholls](https://www.linkedin.com/in/andrewsnicholls/) June 17, 2021
+## .gitignore
+Gotta have it locally, and here is the format to ignore *.jpg files in subdirectories of the directory img:
+`/img/**/*.jpg` [Credit](https://stackoverflow.com/questions/6794717/git-ignore-certain-files-in-sub-directories-but-not-all)
+This pattern works for me for data subfolder ignoring only png and jpg files:
+`**/data/**/*.png`
+`**/data/**/*.jpg`
+## Correcting .gitignore mistakes
+Check the list of files currently being tracked:
+`git ls-tree --name-only HEAD`
+if files ARE listed, but should not, remove files(make a copy someplace), got through git add, commit, push to get a clean status, make sure .gitignore syntax is correct, put files back in, run git status to make sure files are not being added (.gitignore is working), proceed from there
 ## Huge files headache
 [Ref.1 stackoverflow.com](https://stackoverflow.com/questions/33360043/git-error-need-to-remove-large-file)
 ```
@@ -335,6 +364,12 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## Iterate through two lists
+`for i,j in zip(list1, list2):`
+## RAW string for path
+`src = r'C:\Users\Administrator.SHAREPOINTSKY\Desktop\Work\name.txt'`
+[Credit](https://stackoverflow.com/questions/41155382/add-r-prefix-to-a-python-variable)
+
 ## Debugging print as a function of variable
 [Credit](https://stackoverflow.com/questions/6579496/using-print-statements-only-to-debug)
 ```DEBUG = True
@@ -491,6 +526,11 @@ def factorial(n):
         prod*= num
     return prod
 ```
+
+# Numpy
+## Number of digits to print
+[Source](https://numpy.org/doc/stable/reference/generated/numpy.set_printoptions.html)
+`np.set_printoptions(precision=4)`
 
 # Pandas
 * May 20, 2021 Comment was made during pandas lecture (Andrew Nicholls) - pandas load data in memory, and are therefore fast, BUT it becomes a liability for large datasets.
