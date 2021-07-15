@@ -672,9 +672,17 @@ ax.plot(x, y, label=label, color=c)
 ## Subplots
 [subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)
 ```
+line_width = 3
 fig, ax = plt.subplots(figsize=(10, 5))
-ax.plot(x, y)
-ax.set_title('Simple plot')
+ax.plot(x, y, label='My_Label', linewidth=line_width)
+plt.legend(loc='upper left')
+plt.title(f'Training and Validation Accuracy for {img_height}x{img_width} images')
+plt.ylabel('y_label')
+plt.xlabel('x_label')
+plt.grid()
+plt.tight_layout()
+plt.show()
+
 
 
 ```
@@ -688,12 +696,13 @@ For the names of the legend, you have to surround it in square brackets
 * How to Change Font Sizes on a Matplotlib Plot
 ```
 import matplotlib.pyplot as plt
-plt.rc('font', size=10) #controls default text size
-plt.rc('axes', titlesize=10) #fontsize of the title
-plt.rc('axes', labelsize=10) #fontsize of the x and y labels
-plt.rc('xtick', labelsize=10) #fontsize of the x tick labels
-plt.rc('ytick', labelsize=10) #fontsize of the y tick labels
-plt.rc('legend', fontsize=10) #fontsize of the legend
+font_size = 20
+plt.rc('font', size=font_size) #controls default text size
+plt.rc('axes', titlesize=font_size) #fontsize of the title
+plt.rc('axes', labelsize=font_size) #fontsize of the x and y labels
+plt.rc('xtick', labelsize=font_size) #fontsize of the x tick labels
+plt.rc('ytick', labelsize=font_size) #fontsize of the y tick labels
+plt.rc('legend', fontsize=font_size) #fontsize of the legend
 ```
 -----------------
 # Derivations
