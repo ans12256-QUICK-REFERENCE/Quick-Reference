@@ -2,7 +2,7 @@
 **Markdown Preview Enhanced**
 `Cmd+K, V` open preview side-by-side
 **Markdown All in One**
-`Command+Shift+P, Create t- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
+`Command+Shift+P, Create t- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
@@ -35,7 +35,7 @@
   - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
   - [Syntax](#syntax)
     - [Type Hints](#type-hints)
-    - [Formatting](#formatting)
+    - [Formatting and rounding limit number of digits](#formatting-and-rounding-limit-number-of-digits)
     - [Nested Loop with product](#nested-loop-with-product)
     - [Saving pictures](#saving-pictures)
   - [Data wrangling](#data-wrangling)
@@ -105,7 +105,7 @@
   - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
   - [Syntax](#syntax)
     - [Type Hints](#type-hints)
-    - [Formatting](#formatting)
+    - [Formatting and rounding limit number of digits](#formatting-and-rounding-limit-number-of-digits)
     - [Nested Loop with product](#nested-loop-with-product)
     - [Saving pictures](#saving-pictures)
   - [Data wrangling](#data-wrangling)
@@ -230,7 +230,9 @@ This pattern works for me for data subfolder ignoring only png and jpg files:
 ## Correcting .gitignore mistakes
 Check the list of files currently being tracked:
 `git ls-tree --name-only HEAD`
-if files ARE listed, but should not, remove files(make a copy someplace), got through git add, commit, push to get a clean status, make sure .gitignore syntax is correct, put files back in, run git status to make sure files are not being added (.gitignore is working), proceed from there
+if files ARE listed, but should not, remove files(make a copy someplace), got through git add, commit, push to get a clean status, make sure .gitignore syntax is correct, put files back in, run git status to make sure files are not being added (.gitignore is working), proceed from there.
+If on the other hand you just used `git add .` and are not sure `.gitignore` is working correctly, perform a quick check by `git status`, and if unwanted files were added, remove 'em from cached by `git rm -r --cached KERAS_data/**` where all files in `KERAS_data` are to be ignored. Confirm removal by running `git status`. In this case correct `.gitignore` syntax is `KERAS_data/` to ignore all files in all subdirectories of `KERAS_data`.
+
 ## Huge files headache
 [Ref.1 stackoverflow.com](https://stackoverflow.com/questions/33360043/git-error-need-to-remove-large-file)
 ```
@@ -389,12 +391,17 @@ The standard logging module has a more elaborate mechanism for this.
 * typing — Support for type hints [credit](https://docs.python.org/3/library/typing.html)
 `def greeting(name: str) -> str:` <br />
 `    return 'Hello ' + name`
-### Formatting
+### Formatting and rounding limit number of digits
 * formatting
 ```
 print("Sample Mean: {0:1.3f}".format(mu_hat))
 Sample Mean: -0.159
-  ```
+```
+```
+numvar = 135.12345678910
+str(round(numvar, 1))
+'135.1'
+```
 ### Nested Loop with product
 * for mu, sigma_sq in product([-1, 0, 1], [0.5, 1, 2]):
 ```
