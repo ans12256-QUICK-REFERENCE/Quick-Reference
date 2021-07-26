@@ -2,7 +2,7 @@
 **Markdown Preview Enhanced**
 `Cmd+K, V` open preview side-by-side
 **Markdown All in One**
-`Command+Shift+P, Create t- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
+`Command+Shift+P, Create t- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
@@ -227,10 +227,11 @@ Gotta have it locally, and here is the format to ignore *.jpg files in subdirect
 This pattern works for me for data subfolder ignoring only png and jpg files:
 `**/data/**/*.png`
 `**/data/**/*.jpg`
+Syntax is `KERAS_data/` to ignore all files in all subdirectories of `KERAS_data`.
 ## Correcting .gitignore mistakes
 Check the list of files currently being tracked:
 `git ls-tree --name-only HEAD`
-if files ARE listed, but should not, remove files(make a copy someplace), got through git add, commit, push to get a clean status, make sure .gitignore syntax is correct, put files back in, run git status to make sure files are not being added (.gitignore is working), proceed from there.
+if files ARE listed, but should not, remove files(make a copy someplace), go through git add, commit, push to get a clean status, make sure .gitignore syntax is correct, put files back in, run git status to make sure files are not being added (.gitignore is working), proceed from there.
 If on the other hand you just used `git add .` and are not sure `.gitignore` is working correctly, perform a quick check by `git status`, and if unwanted files were added, remove 'em from cached by `git rm -r --cached KERAS_data/**` where all files in `KERAS_data` are to be ignored. Confirm removal by running `git status`. In this case correct `.gitignore` syntax is `KERAS_data/` to ignore all files in all subdirectories of `KERAS_data`.
 
 ## Huge files headache
@@ -274,6 +275,9 @@ When pushing/pulling for the first time after that, reply always in keychain pop
 
 # Markdown
 ## Syntax, LaTex
+* `_Italic_` _Italic_
+* `**Bold Font**` **Bold Font**
+* `**_Bold AND Italic_**` **_Bold AND Italic_**
 * new line `<br />` [credit](https://stackoverflow.com/questions/24575680/new-lines-inside-paragraph-in-readme-md)
 * Greek letters `$\tau$` $\tau$, `$\theta$` $\theta$ [credit](https://stackoverflow.com/questions/54698075/how-do-i-print-greek-letters-in-jupyter)
 * Font size `\Huge, \huge, \Large, \large` [credit](https://texblog.org/2012/08/29/changing-the-font-size-in-latex/)
