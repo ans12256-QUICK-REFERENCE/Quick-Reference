@@ -228,6 +228,13 @@ This pattern works for me for data subfolder ignoring only png and jpg files:
 `**/data/**/*.png`
 `**/data/**/*.jpg`
 Syntax is `KERAS_data/` to ignore all files in all subdirectories of `KERAS_data`.
+```
+# or rather igore ALL files
+data/
+
+# ignore .DS_STORE (file is a Mac OS X folder information file)
+**/**/.DS_STORE
+```
 ## Correcting .gitignore mistakes
 Check the list of files currently being tracked:
 `git ls-tree --name-only HEAD`
