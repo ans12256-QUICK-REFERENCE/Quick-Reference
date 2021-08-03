@@ -14,6 +14,7 @@
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
+  - [Local links to files in repository](#local-links-to-files-in-repository)
   - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
   - [.gitignore](#gitignore)
   - [Correcting .gitignore mistakes](#correcting-gitignore-mistakes)
@@ -84,6 +85,7 @@
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
+  - [Local links to files in repository](#local-links-to-files-in-repository)
   - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
   - [.gitignore](#gitignore)
   - [Correcting .gitignore mistakes](#correcting-gitignore-mistakes)
@@ -216,6 +218,10 @@ WHERE name LIKE 'J%';
 ```
 
 # Git
+## Local links to files in repository
+```
+[json_convert.py](src/json_convert.py)
+```
 ## Listing Python, rather than Jupyter in Languages
 Pro tip: Go to your capstone repo and create a file called .gitattributes. The file should contain one line:
 `*.ipynb linguist-language=Python`
