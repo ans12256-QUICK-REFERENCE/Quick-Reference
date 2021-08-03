@@ -31,6 +31,7 @@
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [Timing code in python](#timing-code-in-python)
   - [Iterate through two lists](#iterate-through-two-lists)
   - [RAW string for path](#raw-string-for-path)
   - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
@@ -102,6 +103,7 @@
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [Timing code in python](#timing-code-in-python)
   - [Iterate through two lists](#iterate-through-two-lists)
   - [RAW string for path](#raw-string-for-path)
   - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
@@ -383,6 +385,20 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## Timing code in python
+```
+import time
+
+start_total = time.time()
+
+# your code
+start_this_block = time.time()
+...
+print(f'This block Time: {time.time() - start_this_block}')
+# end
+
+print(f'Total Time: {time.time() - start_total}')
+```
 ## Iterate through two lists
 `for i,j in zip(list1, list2):`
 ## RAW string for path
