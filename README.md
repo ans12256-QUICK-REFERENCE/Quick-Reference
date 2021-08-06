@@ -1,87 +1,9 @@
-# DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
+DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 **Markdown Preview Enhanced**
 `Cmd+K, V` open preview side-by-side
 **Markdown All in One**
-`Command+Shift+P, Create t- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI - [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
-- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
-- [Table of Contents](#table-of-contents)
-  - [Relevant Links](#relevant-links)
-- [Things that drive you NUTS !!!](#things-that-drive-you-nuts-)
-  - [Environments](#environments)
-    - [Activate my_environment:](#activate-my_environment)
-    - [Check for installed modules:](#check-for-installed-modules)
-  - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
-  - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
-- [SQL](#sql)
-- [Git](#git)
-  - [Merge conflicts](#merge-conflicts)
-  - [Local links to files in repository](#local-links-to-files-in-repository)
-  - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
-  - [.gitignore](#gitignore)
-  - [Correcting .gitignore mistakes](#correcting-gitignore-mistakes)
-  - [Huge files headache](#huge-files-headache)
-  - [MacOS password requests](#macos-password-requests)
-  - [Quick reference](#quick-reference)
-- [Markdown](#markdown)
-  - [Syntax, LaTex](#syntax-latex)
-  - [Images](#images)
-- [Bash Scripting](#bash-scripting)
-    - [make a bash function](#make-a-bash-function)
-  - [Terminal tricks](#terminal-tricks)
-    - [recall line editing in terminal](#recall-line-editing-in-terminal)
-- [Zoom](#zoom)
-  - [!49 Participants](#)
-- [Python](#python)
-  - [Timing code in python](#timing-code-in-python)
-  - [Iterate through two lists](#iterate-through-two-lists)
-  - [RAW string for path](#raw-string-for-path)
-  - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
-  - [Syntax](#syntax)
-    - [Type Hints](#type-hints)
-    - [Formatting and rounding limit number of digits](#formatting-and-rounding-limit-number-of-digits)
-    - [Nested Loop with product](#nested-loop-with-product)
-    - [Saving pictures](#saving-pictures)
-  - [Data wrangling](#data-wrangling)
-    - [Basic python loop](#basic-python-loop)
-    - [Split](#split)
-    - [Space separated numerical data](#space-separated-numerical-data)
-  - [Jupyter Notebooks](#jupyter-notebooks)
-    - [jup shortcut (credit: Hamid)](#jup-shortcut-credit-hamid)
-    - [correct closure of notebooks](#correct-closure-of-notebooks)
-  - [Comprehensions](#comprehensions)
-  - [functions to remember](#functions-to-remember)
-- [Numpy](#numpy)
-  - [Number of digits to print](#number-of-digits-to-print)
-- [geopandas GPS plots](#geopandas-gps-plots)
-- [Pandas](#pandas)
-  - [Visualizations](#visualizations)
-    - [Histograms of all columns](#histograms-of-all-columns)
-    - [Cross-correlation plot](#cross-correlation-plot)
-  - [Data checks](#data-checks)
-  - [Data extraction](#data-extraction)
-    - [SettingWithCopyWarning:](#settingwithcopywarning)
-    - [Complex conditions](#complex-conditions)
-    - [Read json series](#read-json-series)
-    - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
-    - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
-  - [Machine Learning Workflow](#machine-learning-workflow)
-    - [Cross Validation](#cross-validation)
-    - [k-fold Cross Validation](#k-fold-cross-validation)
-    - [Bootstrap](#bootstrap)
-- [Sorting Algorithms](#sorting-algorithms)
-  - [Bubble Sort](#bubble-sort)
-- [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
-  - [Show gray picture as gray](#show-gray-picture-as-gray)
-  - [Named colors](#named-colors)
-  - [Color style](#color-style)
-  - [Color cycler](#color-cycler)
-  - [Subplots](#subplots)
-  - [Single letter legend](#single-letter-legend)
-  - [Font Sizes](#font-sizes)
-- [Derivations](#derivations)
+`Command+Shift+P, "Markdown All in One: Create Table of Contents ... (initiate with cursor UNDER # Table of Contents" to avoid creating TWO (2) tables`
 # Table of Contents
-[DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
-- [DSI_Galvanize_May_17_2021 Notes for DSI Galvanize](#dsi_galvanize_may_17_2021-notes-for-dsi-galvanize)
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
 - [Things that drive you NUTS !!!](#things-that-drive-you-nuts-)
@@ -91,6 +13,10 @@
   - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
+  - [WHERE vs HAVING](#where-vs-having)
+  - [UNION](#union)
+  - [ROUND to 1000](#round-to-1000)
+  - [CASE WHEN](#case-when)
 - [Git](#git)
   - [Merge conflicts](#merge-conflicts)
   - [Local links to files in repository](#local-links-to-files-in-repository)
@@ -215,14 +141,20 @@ Rer-launch jupyter notebook, and try to import modules that were not recognized 
 There should be more elegant ways to force jupyter use correct kernel, datails are to be updated.
 
 # SQL
-* ROUND to 1000
+## WHERE vs HAVING
+* To be populated
+
+## UNION
+* To be populated
+
+## ROUND to 1000
  ```
 SELECT name, population AS "POP", ROUND(gnp, -3)
 FROM country
 WHERE continent = 'South America' AND gnp > 0
 ORDER BY population ASC;
  ```
- * CASE WHEN
+## CASE WHEN
 ```
 SELECT name,
        CASE WHEN continent='Caribbean' THEN 'North America'
