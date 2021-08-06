@@ -531,7 +531,7 @@ alias jup="jupyter notebook"
 3. in corresponding terminal where jupyter was launched from Ctrl+C, Yes to close jupyter server
 4. Make sure there are no hung up jupyter severs: `jupyter notebook list`
 5. If none are listed, in terminal `exit, Ctrl+q` to close terminal - clean close
-
+6. If there are open notebooks, `jupyter notebook stop` or explicitly `jupyter notebook stop 8888`
 ## Comprehensions
 ```python
 [num for num in range(100)]
