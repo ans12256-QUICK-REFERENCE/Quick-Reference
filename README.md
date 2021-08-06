@@ -63,6 +63,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Cross-correlation plot](#cross-correlation-plot)
   - [Data checks](#data-checks)
   - [Data extraction](#data-extraction)
+    - [Basic slicing](#basic-slicing)
+      - [Indexing:](#indexing)
     - [SettingWithCopyWarning:](#settingwithcopywarning)
     - [Complex conditions](#complex-conditions)
     - [Read json series](#read-json-series)
@@ -591,6 +593,44 @@ payments_this_month.loc[payments_this_month.index.get_level_values(1).isin(activ
 all_payments.loc[pd.IndexSlice[:, loan_ids_from_training_set], :][cols]
 ```
 ## Data extraction
+### Basic slicing
+* To select rows whose column value equals a scalar, some_value, use ==:
+`df.loc[df['column_name'] == some_value]`
+* To select rows whose column value is in an iterable, some_values, use isin:
+`df.loc[df['column_name'].isin(some_values)]`
+* Combine multiple conditions with & (AND), | (OR)
+`df.loc[(df['column_name'] >= A) & (df['column_name'] <= B)]`
+* To select rows whose column value does not equal some_value, use !=:
+`df.loc[df['column_name'] != some_value]`
+* isin returns a boolean Series, so to select rows whose value is not in some_values, negate the boolean Series using ~:
+`df.loc[~df['column_name'].isin(some_values)]`
+#### Indexing:
+* Note, however, that if you wish to do this many times, it is more efficient to make an index first, and then use df.loc:
+   A      B  C   D
+0  foo    one  0   0
+1  bar    one  1   2
+3  bar  three  3   6
+6  foo    one  6  12
+7  foo  three  7  14
+`df = df.set_index(['B'])
+print(df.loc['one'])`
+results in
+       A  C   D
+B
+one  foo  0   0
+one  bar  1   2
+one  foo  6  12
+* or, to include multiple values from the index use df.index.isin:
+`df.loc[df.index.isin(['one','two'])]`
+       A  C   D
+B
+one  foo  0   0
+one  bar  1   2
+two  foo  2   4
+two  foo  4   8
+two  bar  5  10
+one  foo  6  12
+
 ### SettingWithCopyWarning:
 `SettingWithCopyWarning:
 A value is trying to be set on a copy of a slice from a DataFrame`
