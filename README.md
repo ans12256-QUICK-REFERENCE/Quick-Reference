@@ -14,6 +14,7 @@
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
+  - [Merge conflicts](#merge-conflicts)
   - [Local links to files in repository](#local-links-to-files-in-repository)
   - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
   - [.gitignore](#gitignore)
@@ -51,12 +52,16 @@
   - [functions to remember](#functions-to-remember)
 - [Numpy](#numpy)
   - [Number of digits to print](#number-of-digits-to-print)
+- [geopandas GPS plots](#geopandas-gps-plots)
 - [Pandas](#pandas)
   - [Visualizations](#visualizations)
     - [Histograms of all columns](#histograms-of-all-columns)
     - [Cross-correlation plot](#cross-correlation-plot)
   - [Data checks](#data-checks)
   - [Data extraction](#data-extraction)
+    - [SettingWithCopyWarning:](#settingwithcopywarning)
+    - [Complex conditions](#complex-conditions)
+    - [Read json series](#read-json-series)
     - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
     - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
   - [Machine Learning Workflow](#machine-learning-workflow)
@@ -67,6 +72,7 @@
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
   - [Show gray picture as gray](#show-gray-picture-as-gray)
+  - [Named colors](#named-colors)
   - [Color style](#color-style)
   - [Color cycler](#color-cycler)
   - [Subplots](#subplots)
@@ -86,6 +92,7 @@
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
 - [Git](#git)
+  - [Merge conflicts](#merge-conflicts)
   - [Local links to files in repository](#local-links-to-files-in-repository)
   - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
   - [.gitignore](#gitignore)
@@ -123,12 +130,16 @@
   - [functions to remember](#functions-to-remember)
 - [Numpy](#numpy)
   - [Number of digits to print](#number-of-digits-to-print)
+- [geopandas GPS plots](#geopandas-gps-plots)
 - [Pandas](#pandas)
   - [Visualizations](#visualizations)
     - [Histograms of all columns](#histograms-of-all-columns)
     - [Cross-correlation plot](#cross-correlation-plot)
   - [Data checks](#data-checks)
   - [Data extraction](#data-extraction)
+    - [SettingWithCopyWarning:](#settingwithcopywarning)
+    - [Complex conditions](#complex-conditions)
+    - [Read json series](#read-json-series)
     - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
     - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
   - [Machine Learning Workflow](#machine-learning-workflow)
@@ -139,6 +150,7 @@
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
   - [Show gray picture as gray](#show-gray-picture-as-gray)
+  - [Named colors](#named-colors)
   - [Color style](#color-style)
   - [Color cycler](#color-cycler)
   - [Subplots](#subplots)
@@ -220,6 +232,14 @@ WHERE name LIKE 'J%';
 ```
 
 # Git
+## Merge conflicts
+Colin Parker  5:46 PM
+After the 10,000th merge conflict:
+```
+alias git-pull = 'cd ..;
+rm -rf fraud-case-study;
+git clone https://github.com/cmp5au/fraud-case-study'
+```
 ## Local links to files in repository
 ```
 [json_convert.py](src/json_convert.py)
@@ -572,6 +592,47 @@ def factorial(n):
 [Source](https://numpy.org/doc/stable/reference/generated/numpy.set_printoptions.html)
 `np.set_printoptions(precision=4)`
 
+# geopandas GPS plots
+[Credit](https://github.com/chrisshaffer/fraud-detection-case-study/blob/main/src/Map_Plots.ipynb)
+```
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# assuming pwd is src
+df = pd.read_json('../data/data.json')
+
+# The easiest way to plot data from Pandas on a world map
+# https://towardsdatascience.com/the-easiest-way-to-plot-data-from-pandas-on-a-world-map-1a62962a27f3
+
+import geopandas as gpd
+countries = gpd.read_file(
+               gpd.datasets.get_path("naturalearth_lowres"))
+countries.head()
+
+countries.plot(color="lightgrey")
+
+filter = df.acct_type.str.contains('fraud')
+# df[filter]  # 1293 ~ 9% fraud 0.0901
+
+font_size = 20
+plt.rc('font', size=font_size) #controls default text size
+plt.rc('axes', titlesize=font_size) #fontsize of the title
+plt.rc('axes', labelsize=font_size) #fontsize of the x and y labels
+plt.rc('xtick', labelsize=font_size) #fontsize of the x tick labels
+plt.rc('ytick', labelsize=font_size) #fontsize of the y tick labels
+plt.rc('legend', fontsize=font_size) #fontsize of the legend
+
+countries.plot(color="lightgrey", figsize=(20,20))
+plt.scatter(df[filter]['venue_longitude'], df[filter]['venue_latitude'], color='r', label='Fraud', zorder=1)
+plt.scatter(df[~filter]['venue_longitude'], df[~filter]['venue_latitude'], color='b', alpha = 0.05, label='NON Fraud')
+plt.title('OVERALL activity locations')
+plt.legend()
+plt.grid()
+plt.savefig('../img/GEO_TOTAL.png')
+
+```
+
 # Pandas
 * May 20, 2021 Comment was made during pandas lecture (Andrew Nicholls) - pandas load data in memory, and are therefore fast, BUT it becomes a liability for large datasets.
 Q: Is there a way to estimate size of data before loading to prevent crash?
@@ -598,6 +659,82 @@ payments_this_month.loc[payments_this_month.index.get_level_values(1).isin(activ
 all_payments.loc[pd.IndexSlice[:, loan_ids_from_training_set], :][cols]
 ```
 ## Data extraction
+### SettingWithCopyWarning:
+`SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame`
+[See the caveats in the documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy)
+An attempt to manipulate a subset of a data frame:
+```
+df['junk']="" # create an empty column to check manipulations
+
+# extract first two values of the column gPlusPlaceId
+gPlusPlaceId_filter = df['gPlusPlaceId'].loc[:1].to_list()
+gPlusPlaceId_filter
+  [1.0469945439999998e+20, 1.030544789e+20]
+
+# now an attempt to assign values in an empty column junk
+# for the rows with these values of these gPlusPlaceId, throws
+# an error SettingWithCopyWarning
+
+df['junk'][df['gPlusPlaceId'].isin(gPlusPlaceId_filter)] = 7
+df.head()
+
+# values do get assigned, but that is NOt a proper way to do it
+# documentation refers to:
+# Returning a view versus a copy
+# When setting values in a pandas object, care must be taken
+# to avoid what is called chained indexing
+
+# here is the most severe recommendation:
+# SettingWithCopyException:
+#      A value is trying to be set on a copy of a slice from a DataFrame.
+#      Try using .loc[row_index,col_indexer] = value instead
+
+# This syntax does NOT cause errors or warnings:
+df.loc[df['gPlusPlaceId'].isin(gPlusPlaceId_filter), 'junk'] = 7
+df.head()
+
+# Here is a bit more complicated example:
+# portion of gps data has been found in need of 1e-6 scaling:
+filter_BAD_gps = (df.Y_NS_latitudes.abs() > 90.0) | (df.X_EW_longitudes.abs() > 180.0)
+filter_BAD_gps.sum()  # (75818)/3087402*100 2.46%
+
+# here is a one of two columns filtered from the dataframe:
+df['Y_NS_latitudes'][filter_BAD_gps].head()
+# It shows values exceeding allowables - filtering works, HOWEVER ...
+
+df['Y_NS_latitudes'][filter_BAD_gps] = df['Y_NS_latitudes'][filter_BAD_gps] / 1e6
+df['Y_NS_latitudes'][filter_BAD_gps]
+```
+Throws the following error:
+SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+
+### Complex conditions
+```
+# construct a filter based on given GPS +- box
+# AND notation as & https://pythoninoffice.com/filter-a-pandas-dataframe-or-and-not/
+gps_box = ((df.Y_NS_latitudes < curr_gps[0] + Y_NS_deg) & (df.Y_NS_latitudes > curr_gps[0] - Y_NS_deg)) & \
+((df.X_EW_longitudes < curr_gps[1] + X_EW_deg) & (df.X_EW_longitudes > curr_gps[1] - X_EW_deg))
+
+# and use:
+# s=1 - smallest marker
+plt.scatter(df.loc[gps_box].X_EW_longitudes,
+            df.loc[gps_box].Y_NS_latitudes, s=1,
+            color='r', label='Google Places')
+
+```
+
+### Read json series
+[ref](https://stackoverflow.com/questions/38380795/pandas-read-json-if-using-all-scalar-values-you-must-pass-an-index)
+`ValueError: If using all scalar values, you must pass an index`
+* Correct:
+`ser = pd.read_json('data.json', typ='series')`
+
+
 ### Syntax matters brackets positions[]
 * This does not work:
 `df_tmp[df_tmp['Species' == 'Coho']]`
@@ -695,6 +832,9 @@ fig, ax = plt.subplots(1, 2, figsize=(15, 10))
 ax[0].imshow(img_np)
 ax[1].imshow(img_np_gr, cmap='gray')
 ```
+## Named colors
+[REF](https://matplotlib.org/stable/gallery/color/named_colors.html)
+olivedrab, azure and similar useful names
 
 ## Color style
 [Ref.](https://matplotlib.org/stable/gallery/style_sheets/ggplot.html)
