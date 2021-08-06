@@ -36,6 +36,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [Sound (ref. yoga classifier)](#sound-ref-yoga-classifier)
   - [Timing code in python](#timing-code-in-python)
   - [Iterate through two lists](#iterate-through-two-lists)
   - [RAW string for path](#raw-string-for-path)
@@ -339,6 +340,30 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## Sound (ref. yoga classifier)
+```
+# SOUND EFFECTS
+# https://anaconda.org/skmad/simpleaudio
+# conda install -c skmad simpleaudio
+# https://pypi.org/project/beepy/
+# pip install beepy
+#
+# check installation in environment with
+# conda list
+#
+import beepy
+# beepy.beep(sound=1) # 1 : 'coin'
+# beepy.beep(sound=2) # 2 : 'robot_error'
+# beepy.beep(sound=3) # 3 : 'error'
+# beepy.beep(sound=4) # 4 : 'ping'
+# beepy.beep(sound=5) # 5 : 'ready'
+# beepy.beep(sound=6) # 6 : 'success'
+# beepy.beep(sound=7) # 7 : 'wilhelm'  # TERRIFYING !!!
+
+# to annotate execution of the line with sound:
+beepy.beep(sound=5) # 5 : 'ready'
+
+```
 ## Timing code in python
 ```
 import time
