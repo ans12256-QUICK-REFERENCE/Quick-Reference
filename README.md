@@ -36,6 +36,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [$1,000,000 not quite 1_000_000](#1000000-not-quite-1_000_000)
   - [Sound (ref. yoga classifier)](#sound-ref-yoga-classifier)
   - [Timing code in python](#timing-code-in-python)
   - [Iterate through two lists](#iterate-through-two-lists)
@@ -71,6 +72,9 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Read json series](#read-json-series)
     - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
     - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
+  - [Data Manipulation](#data-manipulation)
+    - [df.set_index()](#dfset_index)
+    - [df.apply / df.transform](#dfapply--dftransform)
   - [Machine Learning Workflow](#machine-learning-workflow)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
@@ -340,6 +344,12 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## $1,000,000 not quite 1_000_000
+[Ref. PEP 515 -- Underscores in Numeric Literals](https://www.python.org/dev/peps/pep-0515/)
+```
+# grouping decimal numbers by thousands
+amount = 10_000_000.0
+```
 ## Sound (ref. yoga classifier)
 ```
 # SOUND EFFECTS
@@ -797,6 +807,31 @@ Out[31]:
 206         2020    Coho   14245
 ```
 ---------------------------
+
+## Data Manipulation
+### df.set_index()
+`df_places_gps.set_index('gPlusPlaceId_index', inplace=True)` yep 1/1e11
+
+### df.apply / df.transform
+```
+df_places_gps['gPlusPlaceId_index'] = df_places_gps['gPlusPlaceId'].transform(lambda x: int(x/1e11))
+df_places_gps.head()
+
+def add_2(x):
+    return x+2
+
+# Single column
+df['A'] = df['A'].transform(add_2)
+df['A'] = df['A'].apply(add_2)
+df['A'].transform(add_2)
+
+data["A"] = data["A"].apply(lambda x: x-5)
+updated_df = data.apply(lambda x: x-5 if x.name == "A" else x)
+
+# Whole enchilada
+df = df.transform(add_2)
+
+```
 
 ## Machine Learning Workflow
 
