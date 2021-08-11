@@ -18,6 +18,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [ROUND to 1000](#round-to-1000)
   - [CASE WHEN](#case-when)
 - [Git](#git)
+  - [Code on Git in the browser the magic "." ?!](#code-on-git-in-the-browser-the-magic--)
+  - [Remote URL](#remote-url)
   - [Merge conflicts](#merge-conflicts)
   - [Local links to files in repository](#local-links-to-files-in-repository)
   - [Listing Python, rather than Jupyter in Languages](#listing-python-rather-than-jupyter-in-languages)
@@ -73,6 +75,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
     - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
   - [Data Manipulation](#data-manipulation)
+    - [Convert string to](#convert-string-to)
     - [df.set_index()](#dfset_index)
     - [df.apply / df.transform](#dfapply--dftransform)
   - [Machine Learning Workflow](#machine-learning-workflow)
@@ -109,6 +112,8 @@ $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 `conda activate my_environment`
 ### Check for installed modules:
 `conda list`
+from Jupyterlab
+`!pip list`
 ## VS Code is using python 2.7 WTF ?!
 Control+` opens terminal, you type `python -V, and ... drum roll ...
 ```
@@ -171,6 +176,14 @@ WHERE name LIKE 'J%';
 ```
 
 # Git
+## Code on Git in the browser the magic "." ?!
+![img](images/Git_Code_Trick.png)
+![img](images/BEFORE_Git_dot.png)
+![img](images/AFTER_Git_dot.png)
+![images](images/AFTER_Git_dot_Code.png)
+## Remote URL
+`git config --get remote.origin.url`
+
 ## Merge conflicts
 Colin Parker  5:46 PM
 After the 10,000th merge conflict:
@@ -252,7 +265,7 @@ When pushing/pulling for the first time after that, reply always in keychain pop
 * `_Italic_` _Italic_
 * `**Bold Font**` **Bold Font**
 * `**_Bold AND Italic_**` **_Bold AND Italic_**
-* new line `<br />` [credit](https://stackoverflow.com/questions/24575680/new-lines-inside-paragraph-in-readme-md)
+* new line `<br />` [credit](https://stackoverflow.com/questions/24575680/new-lines-inside-paragraph-in-readme-md). Better yet **TWO (2) spaces** after end of the line
 * Greek letters `$\tau$` $\tau$, `$\theta$` $\theta$ [credit](https://stackoverflow.com/questions/54698075/how-do-i-print-greek-letters-in-jupyter)
 * Font size `\Huge, \huge, \Large, \large` [credit](https://texblog.org/2012/08/29/changing-the-font-size-in-latex/)
 * `$\frac{n!}{k!(n-k)!}$` $\frac{n!}{k!(n-k)!}$ [credit](https://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/)
@@ -266,10 +279,10 @@ When pushing/pulling for the first time after that, reply always in keychain pop
 ## Images
 ```
 ![Python Environment](https://imgs.xkcd.com/comics/python_environment.png)
+
 ```
 ![Python Environment](https://imgs.xkcd.com/comics/python_environment.png)
 ![](https://imgs.xkcd.com/comics/machine_learning.png)
-
 
 
 ------------------------------
@@ -809,6 +822,20 @@ Out[31]:
 ---------------------------
 
 ## Data Manipulation
+### Convert string to
+```
+# convert the 'Date' column to datetime format
+df['Date']= pd.to_datetime(df['Date'])
+# Then you can do
+df['Date'].max()
+# or
+df_surprise['reviewTime'].iloc[0].year  #Timestamp('2014-01-18 00:00:00')
+2014
+dir(df_surprise['reviewTime'].iloc[0]) # check all methods
+df_surprise['reviewTime'].iloc[0].day
+18
+# .hour, day, date, year, weekday()
+```
 ### df.set_index()
 `df_places_gps.set_index('gPlusPlaceId_index', inplace=True)` yep 1/1e11
 
