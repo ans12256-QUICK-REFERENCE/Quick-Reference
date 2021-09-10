@@ -13,6 +13,11 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [SQL](#sql)
+  - [SQL Normalization 1NF, 2NF etc.](#sql-normalization-1nf-2nf-etc)
+  - [postgres](#postgres)
+    - [Basic Operations](#basic-operations)
+    - [Most common commands](#most-common-commands)
+    - [Examples](#examples)
   - [WHERE vs HAVING](#where-vs-having)
   - [UNION](#union)
   - [ROUND to 1000](#round-to-1000)
@@ -153,6 +158,124 @@ Rer-launch jupyter notebook, and try to import modules that were not recognized 
 There should be more elegant ways to force jupyter use correct kernel, datails are to be updated.
 
 # SQL
+## SQL Normalization 1NF, 2NF etc.
+[WIKI Database normalization](https://en.wikipedia.org/wiki/Database_normalization)
+Database normalization is the process of structuring a database, usually a relational database, in accordance with a series of so-called normal forms in order to reduce data redundancy and improve data integrity. It was first proposed by Edgar F. Codd as part of his relational model.
+Normalization entails organizing the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints. It is accomplished by applying some formal rules either by a process of synthesis (creating a new database design) or decomposition (improving an existing database design).
+## postgres
+### [Basic Operations](https://www.postgresqltutorial.com/psql-commands/)
+Having made sure postgres server is running, from the terminal type `psql`
+```
+(base) alexey_imac@ALEXEYs-iMac TEMP % psql
+psql (13.4)
+Type "help" for help.
+
+alexey_imac=# \l
+                                      List of databases
+      Name      |    Owner    | Encoding |   Collate   |    Ctype    |   Access privileges
+----------------+-------------+----------+-------------+-------------+-----------------------
+ Employees      | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ France         | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ Store          | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ World          | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ alexey_imac    | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ fraud_detect   | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ movr           | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ movr_employees | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ postgres       | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0      | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |             |          |             |             | postgres=CTc/postgres
+ template1      | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |             |          |             |             | postgres=CTc/postgres
+ ztm            | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+(12 rows)
+
+alexey_imac=# \c
+You are now connected to database "alexey_imac" as user "alexey_imac".
+alexey_imac=# \c World
+You are now connected to database "World" as user "alexey_imac".
+World=# \dt
+              List of relations
+ Schema |      Name       | Type  |  Owner
+--------+-----------------+-------+----------
+ public | city            | table | postgres
+ public | country         | table | postgres
+ public | countrylanguage | table | postgres
+(3 rows)
+
+World=#
+
+
+```
+### Most common commands
+* `\l` list available databases
+* `\c` check connected database or \c dbname to connect to a new
+* `\dt` list available tables
+* `\d` table_name describe table
+* `\d+` show additional details - memory
+* `\dn+` show available schemas
+* `\di+` list all indexes
+* `\ds+` list all sequences
+* `\dx+` list all extensions
+* `\dv` list available views
+* `\df` list available functions
+* `Create database name_of_database;`
+* `Drop database name_of_database;`
+* `Create table name_of_table (name_of_column1 data_type, name_of_column1 data_type,name_of_column1 data_type, …, name_of_columnN data_type,);`
+* 
+* \\? help
+* `\du` list users and roles
+* `\s` command history
+* `\timing` trigger on/off timing of the command execution
+* `\e` edit command in external editor (vi would open - type what you want, Esc, :w, :q! to write, and exit back to psql with execution of the edited code)
+* `Ctrl+L` - clear screen
+* `\ef` function name - edit function
+* `\a` command switches from aligned to non-aligned column output
+* `\H` command formats the output to **HTML format**
+* [`\watch`](https://tomcam.github.io/postgres/#watch) repeats previous command at specified interval
+  The \watch command repeats the previous command at the specified interval. To use it, enter the SQL command you want repeated, then use \watch followed by the number of seconds you want for the interval between repeats, for rexample, \watch 1 to repeat it every second.
+* `show  hba_file;` show location of the configuration file
+* `SELECT pg_reload_conf();` reload configuration file after changes without restarting psql
+* `\q` quit psql
+*
+### Examples
+```
+World=# \d city
+                     Table "public.city"
+   Column    |     Type     | Collation | Nullable | Default
+-------------+--------------+-----------+----------+---------
+ id          | integer      |           | not null |
+ name        | text         |           | not null |
+ countrycode | character(3) |           | not null |
+ district    | text         |           | not null |
+ population  | integer      |           | not null |
+Indexes:
+    "city_pkey" PRIMARY KEY, btree (id)
+    "idx_countrycode" hash (countrycode)
+Referenced by:
+    TABLE "country" CONSTRAINT "country_capital_fkey" FOREIGN KEY (capital) REFERENCES city(id)
+
+World=# \dv
+Did not find any relations.
+World=# \df
+                                 List of functions
+ Schema |        Name        | Result data type |    Argument data types    | Type
+--------+--------------------+------------------+---------------------------+------
+ public | uuid_generate_v1   | uuid             |                           | func
+ public | uuid_generate_v1mc | uuid             |                           | func
+ public | uuid_generate_v3   | uuid             | namespace uuid, name text | func
+ public | uuid_generate_v4   | uuid             |                           | func
+ public | uuid_generate_v5   | uuid             | namespace uuid, name text | func
+ public | uuid_nil           | uuid             |                           | func
+ public | uuid_ns_dns        | uuid             |                           | func
+ public | uuid_ns_oid        | uuid             |                           | func
+ public | uuid_ns_url        | uuid             |                           | func
+ public | uuid_ns_x500       | uuid             |                           | func
+(10 rows)
+
+World=#
+
+```
 ## WHERE vs HAVING
 * To be populated
 
