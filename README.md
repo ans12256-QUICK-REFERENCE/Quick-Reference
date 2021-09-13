@@ -18,6 +18,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Basic Operations](#basic-operations)
     - [Most common commands](#most-common-commands)
     - [Examples](#examples)
+  - [WHERE ... IN (...)](#where--in-)
+  - [WHERE ... LIKE '%string%'](#where--like-string)
   - [WHERE vs HAVING](#where-vs-having)
   - [UNION](#union)
   - [ROUND to 1000](#round-to-1000)
@@ -43,6 +45,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [printing zip()](#printing-zip)
   - [$1,000,000 not quite 1_000_000](#1000000-not-quite-1_000_000)
   - [Sound (ref. yoga classifier)](#sound-ref-yoga-classifier)
   - [Timing code in python](#timing-code-in-python)
@@ -222,7 +225,7 @@ World=#
 * `Create database name_of_database;`
 * `Drop database name_of_database;`
 * `Create table name_of_table (name_of_column1 data_type, name_of_column1 data_type,name_of_column1 data_type, …, name_of_columnN data_type,);`
-* 
+*
 * \\? help
 * `\du` list users and roles
 * `\s` command history
@@ -276,6 +279,17 @@ World=# \df
 World=#
 
 ```
+## WHERE ... IN (...)
+Show the name and population for France, Germany, Italy
+`SELECT name, population
+FROM world
+WHERE name IN ('France', 'Germany', 'Italy');`
+## WHERE ... LIKE '%string%'
+Show the countries which have a name that includes the word 'United'
+`SELECT name
+FROM world
+WHERE name LIKE '%United%'`
+
 ## WHERE vs HAVING
 * To be populated
 
@@ -480,6 +494,14 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## printing zip()
+```
+a=[1,2,3]; b=['zebra', 4, 'test']; c=[(1,2), 'string', 15]
+d=zip(a,b,c)
+print(tuple(d))
+
+((1, 'zebra', (1, 2)), (2, 4, 'string'), (3, 'test', 15))
+```
 ## $1,000,000 not quite 1_000_000
 [Ref. PEP 515 -- Underscores in Numeric Literals](https://www.python.org/dev/peps/pep-0515/)
 ```
