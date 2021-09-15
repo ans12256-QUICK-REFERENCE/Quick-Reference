@@ -62,6 +62,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Split](#split)
     - [Space separated numerical data](#space-separated-numerical-data)
   - [Jupyter Notebooks](#jupyter-notebooks)
+    - [Changing Browser, say from Safari to FireFox](#changing-browser-say-from-safari-to-firefox)
+    - [jul shortcut](#jul-shortcut)
     - [jup shortcut (credit: Hamid)](#jup-shortcut-credit-hamid)
     - [correct closure of notebooks](#correct-closure-of-notebooks)
   - [Comprehensions](#comprehensions)
@@ -685,6 +687,16 @@ print(data)
 * to get this:
 * [-0.24525234, 0.34258838, 0.66512235, -2.15445321, 1.30069225, 0.42041963, -0.67904514, 0.2990795, -0.20201848, 0.05410431, 0.26106412, -0.89171509, -0.15872403, 0.83111975, -0.11941908, 0.00667906, 0.10079108, -0.60899067, 0.52596165, 0.08029374, 0.80668211, -0.10465914, -0.44508377, -0.76350006, 0.55267201, 0.53581223, -0.68529436, -0.64163356, 0.4809197, -0.97424692, -0.12309056, 0.30210824, -0.50851312, 0.49089701, -0.5729919, 1.84253363, -0.77796115, 0.49132436, -0.50516287, -0.09554953, 0.70306746, 0.17312964, 1.37490091, -0.72273023, -0.68162468, 0.01836007, 0.71899727, -0.86227295, -0.04175399, -0.21037323]
 ## Jupyter Notebooks
+### Changing Browser, say from Safari to FireFox
+Sept. 15, 2021
+[confetti.ai](https://www.confetti.ai/) does not work in Safari, and to do exercises one has to switch from Safari to either Chrome(do not like Google) or FireFox. Launching a jupyter notebook in FireFox in the easiest way is as follows:
+* Setup a password by [`jupyter notebook password`](https://stackoverflow.com/questions/44440973/how-to-run-jupyter-notebooks-locally-with-password-and-no-token). Once password is setup (and stored in `Verify password:
+[NotebookPasswordApp] Wrote hashed password to /Users/alexey_imac/.jupyter/jupyter_notebook_config.json`),
+* type the usual
+`jupyter notebook` or `jup` if you setup an alias (`jul` does not work need to follow up). A tab will popup in your default browser (say Safari - the one you **DO NOT WANT**), however tab would only have password field, and will not launch actual jupyter page. COpy-paste URL for this password prompt into browser of your choice, say FireFox, type password you have just set, and voila! - you are running jupyter in the browser of your choice!
+### jul shortcut
+In ~/.zshrc add:
+`alias jul="jupyter lab"`
 ### jup shortcut (credit: Hamid)
 In ~/.zshrc add:
 ```
