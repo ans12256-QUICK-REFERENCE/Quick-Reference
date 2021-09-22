@@ -45,6 +45,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [Zoom](#zoom)
   - [!49 Participants](#)
 - [Python](#python)
+  - [what is in session memory dir() ?](#what-is-in-session-memory-dir-)
+  - [pointing to the same memory check id(x)](#pointing-to-the-same-memory-check-idx)
   - [printing zip()](#printing-zip)
   - [$1,000,000 not quite 1_000_000](#1000000-not-quite-1_000_000)
   - [Sound (ref. yoga classifier)](#sound-ref-yoga-classifier)
@@ -496,6 +498,30 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
 # Python
+## what is in session memory dir() ?
+`dir()` is somewhat similar to jupyter(MATLAB) `who` or `whos` commands. Can be used to say <br> `del junk_variable_taking_2_much_memory` after discovering such a nuisance with `dir()`
+## pointing to the same memory check id(x)
+```
+>> x=4
+>> y=x
+>> x +=3
+>> y
+4
+>> x
+7
+>> id(x)
+140609038333856
+>> id(y)
+140609038333760
+>> a=2
+>> b=2
+>> id(a), id(b)
+(140609038333696, 140609038333696)
+>> id(a)
+140609038333696
+>> id(b)
+140609038333696
+```
 ## printing zip()
 ```
 a=[1,2,3]; b=['zebra', 4, 'test']; c=[(1,2), 'string', 15]
