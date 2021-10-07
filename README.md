@@ -46,6 +46,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [!49 Participants](#)
 - [Python](#python)
   - [what is in session memory dir() ?](#what-is-in-session-memory-dir-)
+  - [built-in functions, keywords and available functions](#built-in-functions-keywords-and-available-functions)
   - [pointing to the same memory check id(x)](#pointing-to-the-same-memory-check-idx)
   - [printing zip()](#printing-zip)
   - [$1,000,000 not quite 1_000_000](#1000000-not-quite-1_000_000)
@@ -500,6 +501,16 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 # Python
 ## what is in session memory dir() ?
 `dir()` is somewhat similar to jupyter(MATLAB) `who` or `whos` commands. Can be used to say <br> `del junk_variable_taking_2_much_memory` after discovering such a nuisance with `dir()`
+## built-in functions, keywords and available functions
+given an object, one can list available methods simply by
+`dir(my_object)`
+On the other hand what if you do not remember a specific built-in finction - say was it `isinstance()` or `is_instance()` ? One can drill down using same empty `dir()` used in previous bullet point to check what's in memory, and further down after `dir()` displays `'__builtin__'` or `'__builtins__'` to do `dir(__builtins__)` to drill through a more complete list.
+Yet there are core language constructs  [keywords](https://stackoverflow.com/questions/8204542/python3-what-is-the-difference-between-keywords-and-builtins) like `7 in [2,3,8] ~ False`. To check keywords, one may type
+```
+import keyword
+kword.kwlist
+```
+And if you had not had enough, check this out: [keywords doc](https://docs.python.org/3/reference/lexical_analysis.html#keywords)
 ## pointing to the same memory check id(x)
 ```
 >> x=4
