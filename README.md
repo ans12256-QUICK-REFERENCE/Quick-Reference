@@ -7,6 +7,9 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
 - [Things that drive you NUTS !!!](#things-that-drive-you-nuts-)
+  - [Safari](#safari)
+    - [Safari Print Selection](#safari-print-selection)
+    - [Google Docs paste without format](#google-docs-paste-without-format)
   - [Environments](#environments)
     - [Activate my_environment:](#activate-my_environment)
     - [Check for installed modules:](#check-for-installed-modules)
@@ -124,6 +127,13 @@ $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 [Step-by-Step info for MacOS](https://siytek.com/ubuntu-mac-virtualbox/)
 
 # Things that drive you NUTS !!!
+## Safari
+### Safari Print Selection
+[Credit](https://forums.macrumors.com/threads/how-do-i-print-selection-only-safari.79715/)
+Select area on the page, and press `Command+Shift+Y` `⌘⇧Y` this creates a "Sticky Note" and opens corresponding Apple app (Yes there is a Stickies app on MacOS! 😅), then just `Command+P` to open print preview, and maybe `Command+Q` to close Stickies app.
+### Google Docs paste without format
+Credit: [Colin Parker](https://www.linkedin.com/in/colinmp/)
+`Shift+Option+Command+V` `⇧⌥⌘V`. The reward for the contorted fingers is a nice plain format paste operation !
 ## Environments
 ### Activate my_environment:
 `conda activate my_environment`
@@ -631,6 +641,12 @@ The standard logging module has a more elaborate mechanism for this.
 ```
 print("Sample Mean: {0:1.3f}".format(mu_hat))
 Sample Mean: -0.159
+```
+0 here is sequential number of (several) elements in the format() list
+Unpacking (*phone)§ and formatting phone number:
+```
+phone = [8, 0, 0, 8, 6, 7, 5, 3, 0, 9]
+formatted_phone = "({}{}{}) {}{}{}-{}{}{}{}".format(*phone)
 ```
 ```
 numvar = 135.12345678910
