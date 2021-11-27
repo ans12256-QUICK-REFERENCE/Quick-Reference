@@ -15,6 +15,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Check for installed modules:](#check-for-installed-modules)
   - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
+- [Abbreviations](#abbreviations)
+  - [i.i.d.](#iid)
 - [SQL](#sql)
   - [SQL Normalization 1NF, 2NF etc.](#sql-normalization-1nf-2nf-etc)
   - [postgres](#postgres)
@@ -179,6 +181,10 @@ re-check again(jupyter kernelspec list), jupyter should now locate correct anaco
 Rer-launch jupyter notebook, and try to import modules that were not recognized before (In my case import bs4). Hopefully it would work now.
 There should be more elegant ways to force jupyter use correct kernel, datails are to be updated.
 
+# Abbreviations
+## i.i.d.
+[independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)
+* In probability theory and statistics, a collection of random variables is independent and identically distributed if each random variable has the same probability distribution as the others and all are mutually independent.[1] This property is usually abbreviated as i.i.d. or iid or IID. Herein, i.i.d. is used, because it is the most prevalent.
 # SQL
 ## SQL Normalization 1NF, 2NF etc.
 [WIKI Database normalization](https://en.wikipedia.org/wiki/Database_normalization)
