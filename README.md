@@ -629,6 +629,7 @@ print(f'Total Time: {time.time() - start_total}')
 * Nope, I just get a syntax error::File "<ipython-input-7-ed00422a9f6b>", line 2 %%timeit ^ SyntaxError: invalid syntax –npross
 Cell magics must be on the first line of the cell, or you will get that error.
 [%%timeit -n 10](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit)
+* Timing data reading is better done with `%%time` since **%%timeit** appears to interfere with data reading (_ASV Dec. 2, 2021_)
 
 ## Iterate through two lists
 `for i,j in zip(list1, list2):`
