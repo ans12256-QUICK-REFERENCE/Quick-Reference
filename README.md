@@ -17,6 +17,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [Abbreviations](#abbreviations)
   - [i.i.d.](#iid)
+- [STATISTICS](#statistics)
 - [SQL](#sql)
   - [SQL Normalization 1NF, 2NF etc.](#sql-normalization-1nf-2nf-etc)
   - [postgres](#postgres)
@@ -61,6 +62,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [$1,000,000 not quite 1_000_000](#1000000-not-quite-1_000_000)
   - [Sound (ref. yoga classifier)](#sound-ref-yoga-classifier)
   - [Timing code in python](#timing-code-in-python)
+  - [Timing code in Jupyter](#timing-code-in-jupyter)
   - [Iterate through two lists](#iterate-through-two-lists)
   - [RAW string for path](#raw-string-for-path)
   - [Debugging print as a function of variable](#debugging-print-as-a-function-of-variable)
@@ -185,6 +187,8 @@ There should be more elegant ways to force jupyter use correct kernel, datails a
 ## i.i.d.
 [independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)
 * In probability theory and statistics, a collection of random variables is independent and identically distributed if each random variable has the same probability distribution as the others and all are mutually independent.[1] This property is usually abbreviated as i.i.d. or iid or IID. Herein, i.i.d. is used, because it is the most prevalent.
+# STATISTICS
+
 # SQL
 ## SQL Normalization 1NF, 2NF etc.
 [WIKI Database normalization](https://en.wikipedia.org/wiki/Database_normalization)
@@ -617,6 +621,15 @@ print(f'This block Time: {time.time() - start_this_block}')
 
 print(f'Total Time: {time.time() - start_total}')
 ```
+## Timing code in Jupyter
+[Stackoverflow ref](https://stackoverflow.com/questions/44890314/timing-a-single-block-in-jupyter-with-one-line-of-code)
+`%%timeit`
+[timeit options doc](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit)
+* Use the cell magic %%timeit (with two %) to time a whole jupyter cell, instead of just a single line. **The cell magic must come before any python code in the cell.**
+* Nope, I just get a syntax error::File "<ipython-input-7-ed00422a9f6b>", line 2 %%timeit ^ SyntaxError: invalid syntax –npross
+Cell magics must be on the first line of the cell, or you will get that error.
+[%%timeit -n 10](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit)
+
 ## Iterate through two lists
 `for i,j in zip(list1, list2):`
 ## RAW string for path
