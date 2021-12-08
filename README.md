@@ -90,6 +90,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Histograms of all columns](#histograms-of-all-columns)
     - [Cross-correlation plot](#cross-correlation-plot)
   - [Data checks](#data-checks)
+    - [Show non NaNs in a column](#show-non-nans-in-a-column)
+    - [Select object columns](#select-object-columns)
   - [Data extraction](#data-extraction)
     - [Basic slicing](#basic-slicing)
       - [Indexing:](#indexing)
@@ -99,6 +101,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
     - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
   - [Data Manipulation](#data-manipulation)
+    - [Create new column based on dictionary](#create-new-column-based-on-dictionary)
     - [Convert string to](#convert-string-to)
     - [df.set_index()](#dfset_index)
     - [df.apply / df.transform](#dfapply--dftransform)
@@ -878,14 +881,23 @@ plt.savefig(‘df_hist.pdf’, dpi=300)
 
 
 ## Data checks
-* Show non NaNs in a column
+### Show non NaNs in a column
 `df['Verified Date'].dropna().head`
+* here is another way:
+```
+# foof = dfY['from'].notnull() # != 'NaN'
+# dfY['from'][foof].iloc[0:10]
+```
+
 * Multi_index
 ```
 payments_this_month.loc[payments_this_month.index.get_level_values(1).isin(active_loan_ids), :]
 
 all_payments.loc[pd.IndexSlice[:, loan_ids_from_training_set], :][cols]
 ```
+### Select object columns
+`dfY_obj = dfY.select_dtypes("object")
+dfY_obj.info()`
 ## Data extraction
 ### Basic slicing
 * To select rows whose column value equals a scalar, some_value, use ==:
@@ -1068,6 +1080,14 @@ Out[31]:
 ---------------------------
 
 ## Data Manipulation
+### Create new column based on dictionary
+**Motivation**: - replace say a finite list of email addresses in a database with numerical indicies for say plotting using a dictionary, created by
+```
+from_lst = list(df['from'].unique())
+from_dic = dict(zip(from_lst, range(len(from_lst))))
+```
+[stackoverflow ref.](https://stackoverflow.com/questions/29794959/pandas-add-new-column-to-dataframe-from-dictionary)
+`df['from_ID'] = df['from'].map(from_dic)` where from_dic is a dictionary with keys found in column 'from' [pandas map doc ](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.map.html)
 ### Convert string to
 ```
 # convert the 'Date' column to datetime format
