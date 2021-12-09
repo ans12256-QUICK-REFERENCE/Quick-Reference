@@ -14,6 +14,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Activate my_environment:](#activate-my_environment)
     - [Check for installed modules:](#check-for-installed-modules)
   - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
+  - [Jupyter Notebook not saving: '_xsrf' argument missing from post](#jupyter-notebook-not-saving-_xsrf-argument-missing-from-post)
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [Abbreviations](#abbreviations)
   - [i.i.d.](#iid)
@@ -168,6 +169,11 @@ Well if you calm down and press Ctrl+Shift+P, if necessary type "Python: Select 
 Sure enough ! How is VSCode supposed to read you MIND ?! It ain't that smart ... YET
 <font size="10">👽</font>
 The sad part selection does not stick. Once selected, check for nother Ctrl+Shift+P shows
+
+## Jupyter Notebook not saving: '_xsrf' argument missing from post
+* Motivation: After spending hours messing with your notebook you may notice the following message in the upper right corner accompanied by "Autosave failed" : **'_xsrf' argument missing from POST** Closing notebook would lead to the loss of recent edits.
+* [Stackoverflow solution:](https://stackoverflow.com/questions/55014094/jupyter-notebook-not-saving-xsrf-argument-missing-from-post) __Just open another (non-running, existing) notebook on the same kernel, and the issue is magically gone; you can again save the notebooks that were previously showing the _xsrf error.__
+* If there is no other notebooks in the kernel directory, copy-paste one (does not matter which one) from someplace else, and open it. Problem with the original disappears. Why? Does it matter? Look up complete source article for more details.
 
 ## Jupyter import error of installed module
 Jupyter packages installation problem follow up:
