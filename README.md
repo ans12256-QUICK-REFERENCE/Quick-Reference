@@ -172,7 +172,7 @@ Remove geopandas, that while being listed in `conda list geo`, would not import 
 ```
 conda update --name base conda
 conda list --name base conda
-conda update --all
+conda update --all 
 ```
 ## VS Code is using python 2.7 WTF ?!
 Control+` opens terminal, you type `python -V, and ... drum roll ...
