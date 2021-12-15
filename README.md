@@ -167,12 +167,29 @@ conda update --all
 `conda uninstall geopandas`
 Remove geopandas, that while being listed in `conda list geo`, would not import in a notebook complaining about unavailability of C library or something to this effect.
 * Surprisingly uninstallation of geopandas resulted in a huge list of various packages being updated/superseded/removed
+* STEP 4
+Well it turned out it was not the end of the story. Jupyter would launch fine in geo_env, but the kernel would not be visible ?!
+```
+(geo_env) alexey_imac@ALEXEYs-iMac TEMP % jupyter kernelspec list
+[ListKernelSpecs] WARNING | Native kernel (python3) is not available
+[ListKernelSpecs] WARNING | Native kernel (python3) is not available
+No kernels available
+```
+Additional search located [this entry](https://stackoverflow.com/questions/58068818/how-to-use-jupyter-notebooks-in-a-conda-environment/58068850#58068850) with the following commands fixing the issue:
+```
+conda install ipykernel
+ipython kernel install --user --name=geo_env
+(geo_env) alexey_imac@ALEXEYs-iMac TEMP % jupyter kernelspec list
+Available kernels:
+  geo_env    /Users/alexey_imac/Library/Jupyter/kernels/geo_env
+  python3    /Users/alexey_imac/opt/anaconda3/envs/geo_env/share/jupyter/kernels/python3
+```
 ## conda update anaconda error
 [PackageNotInstalledError: Package is not installed in prefix](https://stackoverflow.com/questions/51712693/packagenotinstallederror-package-is-not-installed-in-prefix)
 ```
 conda update --name base conda
 conda list --name base conda
-conda update --all 
+conda update --all
 ```
 ## VS Code is using python 2.7 WTF ?!
 Control+` opens terminal, you type `python -V, and ... drum roll ...
