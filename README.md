@@ -168,6 +168,14 @@ conda update --all
 Remove geopandas, that while being listed in `conda list geo`, would not import in a notebook complaining about unavailability of C library or something to this effect.
 * Surprisingly uninstallation of geopandas resulted in a huge list of various packages being updated/superseded/removed
 * STEP 4
+[install geopandas in geo_env](https://geopandas.org/en/stable/getting_started/install.html)
+```
+conda create -n geo_env
+conda activate geo_env
+conda config --env --add channels conda-forge
+conda config --env --set channel_priority strict
+conda install python=3 geopandas
+```
 Well it turned out it was not the end of the story. Jupyter would launch fine in geo_env, but the kernel would not be visible ?!
 ```
 (geo_env) alexey_imac@ALEXEYs-iMac TEMP % jupyter kernelspec list
