@@ -13,6 +13,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Environments](#environments)
     - [Activate my_environment:](#activate-my_environment)
     - [Check for installed modules:](#check-for-installed-modules)
+  - [500: Internal Server Error](#500-internal-server-error)
+  - [conda update anaconda error](#conda-update-anaconda-error)
   - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
   - [Jupyter Notebook not saving: '_xsrf' argument missing from post](#jupyter-notebook-not-saving-_xsrf-argument-missing-from-post)
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
@@ -146,9 +148,32 @@ Credit: [Colin Parker](https://www.linkedin.com/in/colinmp/)
 ### Activate my_environment:
 `conda activate my_environment`
 ### Check for installed modules:
-`conda list`
+`conda list geo` where `geo` is a substring of the package name. Otherwise the whole list is output. Essentially, conda list accepts regex.
 from Jupyterlab
 `!pip list`
+## 500: Internal Server Error
+Attempts to install geopandas in (base) environment had been disastrous (Dec. 15, 2021) leading to multiple attempts to restore functionality as
+`conda list --revisions` with subsequent attempts to `conda install --revision 27`, where `27` was configuration prior to geopandas mess. These attempts were ultimately unsuccessful with a list of packages being diagnosed as missing, and attempts to reinstall them unsuccessful.
+Eventually two steps allowed to restore functionality:
+* STEP 1 [Clean anaconda install](https://stackoverflow.com/questions/62359771/warning-2-possible-package-resolutions-only-showing-differing-packages-anaconda):
+```
+conda install anaconda-clean
+anaconda-clean --yes
+conda update --all
+```
+* STEP 2 [Re-install jupyter](https://anaconda.org/anaconda/jupyter)
+`conda install -c anaconda jupyter`
+* STEP 3
+`conda uninstall geopandas`
+Remove geopandas, that while being listed in `conda list geo`, would not import in a notebook complaining about unavailability of C library or something to this effect.
+* Surprisingly uninstallation of geopandas resulted in a huge list of various packages being updated/superseded/removed
+## conda update anaconda error
+[PackageNotInstalledError: Package is not installed in prefix](https://stackoverflow.com/questions/51712693/packagenotinstallederror-package-is-not-installed-in-prefix)
+```
+conda update --name base conda
+conda list --name base conda
+conda update --all
+```
 ## VS Code is using python 2.7 WTF ?!
 Control+` opens terminal, you type `python -V, and ... drum roll ...
 ```
