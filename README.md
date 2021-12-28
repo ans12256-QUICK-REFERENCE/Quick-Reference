@@ -87,6 +87,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [functions to remember](#functions-to-remember)
 - [Numpy](#numpy)
   - [Number of digits to print](#number-of-digits-to-print)
+- [geopy address/zip -> gps converter](#geopy-addresszip---gps-converter)
 - [geopandas GPS plots](#geopandas-gps-plots)
 - [Pandas](#pandas)
   - [Visualizations](#visualizations)
@@ -115,6 +116,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [Sorting Algorithms](#sorting-algorithms)
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
+  - [Mouse rotation and zoom of 3D plot](#mouse-rotation-and-zoom-of-3d-plot)
   - [Show gray picture as gray](#show-gray-picture-as-gray)
   - [Named colors](#named-colors)
   - [Color style](#color-style)
@@ -879,6 +881,13 @@ def factorial(n):
 [Source](https://numpy.org/doc/stable/reference/generated/numpy.set_printoptions.html)
 `np.set_printoptions(precision=4)`
 
+# geopy address/zip -> gps converter
+[geopy](https://pypi.org/project/geopy/)
+`(geo_env)%conda install -c conda-forge geopy`
+geopy is a Python client for several popular geocoding web services.
+geopy makes it easy for Python developers to locate the coordinates of addresses, cities, countries, and landmarks across the globe using third-party geocoders and other data sources.
+geopy includes geocoder classes for the OpenStreetMap Nominatim, Google Geocoding API (V3), and many other geocoding services. The full list is available on the Geocoders doc section. Geocoder classes are located in geopy.geocoders.
+
 # geopandas GPS plots
 [Credit](https://github.com/chrisshaffer/fraud-detection-case-study/blob/main/src/Map_Plots.ipynb)
 ```
@@ -1207,6 +1216,26 @@ df = df.transform(add_2)
 # library call
 ```
 # `matplotlib.pyplot` visualizations
+## Mouse rotation and zoom of 3D plot
+* Motivation: When performing **Principal Component Analysis** (PCA), the highest visual dimension is 3D. A few additional dimensions can be "sqeezed in" by using different colors (say for categories), different marker shapes and sizes. The shapes of the "PCA'd" cloud of n parameters reduced to 3 can take strange shapes:
+![img](images/3D_rotate_01.jpg)
+* The primary concern however is to visualize the shape from the best possible angle. Dynamic rotation with the mouse would be the best option.
+
+(12/28/2021) 3D plots are available in jupyter notebooks using [mplot3d](https://matplotlib.org/stable/api/toolkits/mplot3d.html#module-mpl_toolkits.mplot3d.axis3d), that claims to `The interactive backends also provide the ability to rotate and zoom the 3D scene. One can rotate the 3D scene by simply clicking-and-dragging the scene. Zooming is done by right-clicking the scene and dragging the mouse up and down (unlike 2D plots, the toolbar zoom button is not used).`
+Attempts to use above mentioned functionality were initially unsuccessful. Plots would be static with no dynamic controls shown above.
+* As it turns out the [key line to enable subject functionality](https://stackoverflow.com/questions/33436221/displaying-rotatable-3d-plots-in-ipython-or-jupyter-notebook) is `%matplotlib notebook`:
+```
+%matplotlib notebook
+x = [1, 2, 3]
+y = [1, 6, 7]
+z = [8, 9, 11]
+fig = plt.figure(figsize=(5,5))
+ax = fig.add_subplot(projection='3d')
+ax.scatter(x, y, z, s=20, color='r')
+plt.show()
+```
+![img](images/3D_rotate_02.jpg)
+
 ## Show gray picture as gray
 ```
 fig, ax = plt.subplots(1, 2, figsize=(15, 10))
