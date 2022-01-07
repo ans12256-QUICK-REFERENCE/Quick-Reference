@@ -117,6 +117,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Bubble Sort](#bubble-sort)
 - [`matplotlib.pyplot` visualizations](#matplotlibpyplot-visualizations)
   - [Mouse rotation and zoom of 3D plot](#mouse-rotation-and-zoom-of-3d-plot)
+  - [How to prevent (scrollable) sub-window in Jupyter notebooks?](#how-to-prevent-scrollable-sub-window-in-jupyter-notebooks)
   - [Show gray picture as gray](#show-gray-picture-as-gray)
   - [Named colors](#named-colors)
   - [Color style](#color-style)
@@ -1235,6 +1236,10 @@ ax.scatter(x, y, z, s=20, color='r')
 plt.show()
 ```
 ![img](images/3D_rotate_02.jpg)
+## How to prevent (scrollable) sub-window in Jupyter notebooks?
+* 01/06/2022, Motivation: Some graphs get output in a scrollable subwindow in Jupyter making only portion of the figure visible.
+* The solution is suprisingly [simple](https://www.reddit.com/r/IPython/comments/6pqukg/how_to_prevent_scrollable_subwindow_in_jupyter/): Click in the lefw margin of the scrollable subwindow to open to full size, just as suggested by the highlighted baloon help: `click to scroll output, double click to hide`)
+![img](images/3D_rotate_subwindow.jpg)
 
 ## Show gray picture as gray
 ```
