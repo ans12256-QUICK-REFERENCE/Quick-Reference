@@ -53,6 +53,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [recall line editing in terminal](#recall-line-editing-in-terminal)
 - [Zoom](#zoom)
   - [!49 Participants](#)
+- [Jupyter](#jupyter)
+  - [Magic Commands](#magic-commands)
 - [Python](#python)
   - [print tricks no new line etc.](#print-tricks-no-new-line-etc)
     - [Escape apostrophe](#escape-apostrophe)
@@ -90,6 +92,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [geopy address/zip -> gps converter](#geopy-addresszip---gps-converter)
 - [geopandas GPS plots](#geopandas-gps-plots)
 - [Pandas](#pandas)
+  - [Create Data Frame with specific schema](#create-data-frame-with-specific-schema)
   - [Visualizations](#visualizations)
     - [Histograms of all columns](#histograms-of-all-columns)
     - [Cross-correlation plot](#cross-correlation-plot)
@@ -584,6 +587,26 @@ after up arrow or typing beginning, and Esc+p or Ctrl+R recall,
 ![Obsolete Zoom Ver. 5.4.9 on Mac](images/Zoom_Blur.png)
 ![49 Participants](images/Zoom_49_participants.png)
 ---------------------------------
+# Jupyter
+## Magic Commands
+[documentation](https://ipython.readthedocs.io/en/stable/interactive/magics.html)
+[%whos](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-whos):
+Like %who, but gives some extra information about each variable.
+The same type filtering of %who can be applied here.
+For all variables, the type is printed. Additionally it prints:
+For {},[],(): their length.
+For numpy arrays, a summary with shape, number of elements, typecode and size in memory.
+Everything else: a string representation, snipping their middle if too long.
+Examples
+Define two variables and list them with whos:
+```
+In [1]: alpha = 123
+In [2]: beta = 'test'
+In [3]: %whos
+Variable   Type        Data/Info
+alpha      int         123
+beta       str         test
+```
 # Python
 ## print tricks no new line etc.
 ### Escape apostrophe
@@ -935,6 +958,26 @@ plt.savefig('../img/GEO_TOTAL.png')
 Q: Is there a way to estimate size of data before loading to prevent crash?
 A Credit (Everett Schroeder):
 [Loading large datasets in Pandas](https://towardsdatascience.com/loading-large-datasets-in-pandas-11bdddd36f7b)
+
+## Create Data Frame with specific schema
+* 01/06/2022 Motivation: Create and populate DataFrame with correct data types/schema
+* [credit to @Simon Ejsing](https://stackoverflow.com/questions/36462257/create-empty-dataframe-in-pandas-specifying-column-types):
+```
+schema = { 'name': str, 'number': float, 'date': np.datetime64}
+df = pd.DataFrame(columns=schema.keys()).astype(schema)
+df.info()
+
+<class 'pandas.core.frame.DataFrame'>
+Index: 0 entries
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   name    0 non-null      object
+ 1   number  0 non-null      float64
+ 2   date    0 non-null      datetime64[ns]
+dtypes: datetime64[ns](1), float64(1), object(1)
+memory usage: 0.0+ bytes
+```
 
 ## Visualizations
 ### Histograms of all columns
