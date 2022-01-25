@@ -1239,16 +1239,18 @@ df = df.transform(add_2)
 
 ## Machine Learning Workflow
 ### References
-<table><tr><th>
 * [1] [_Hands-on Machine Learning with Scikit-Learn, Keras & TensorFlow_, 2nd Edition, by Aurélien Géron (O'Reilly). Copyright 2019 Kiwisoft S.A.S., 978-1-492-03264-9.](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
 * [2] [Jupyter notebooks](https://github.com/ageron)
 * [3] [Youtube channel](https://www.youtube.com/c/aureliengeron)
-</th><th>
-![Hands-on](images/HANDS-OB_ML_BOOK.jpeg)</th></tr>
-</table>
-|---|---|
-|test1|test2|
-|---|---|
+
+![Hands-on](images/HANDS-OB_ML_BOOK.jpeg)
+
+|   |   |
+| ------------- | ------------- |
+| * [1] [_Hands-on Machine Learning with Scikit-Learn, Keras & TensorFlow_, 2nd Edition, by Aurélien Géron (O'Reilly). Copyright 2019 Kiwisoft S.A.S., 978-1-492-03264-9.](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
+* [2] [Jupyter notebooks](https://github.com/ageron)
+* [3] [Youtube channel](https://www.youtube.com/c/aureliengeron)  | ![Hands-on](images/HANDS-OB_ML_BOOK.jpeg)  |
+
 
 ### Saving Models
 Ref.[1], p.75
