@@ -113,6 +113,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [df.set_index()](#dfset_index)
     - [df.apply / df.transform](#dfapply--dftransform)
   - [Machine Learning Workflow](#machine-learning-workflow)
+    - [References](#references)
+    - [Saving Models](#saving-models)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
     - [Bootstrap](#bootstrap)
@@ -1236,6 +1238,21 @@ df = df.transform(add_2)
 ```
 
 ## Machine Learning Workflow
+### References
+* [1] [_Hands-on Machine Learning with Scikit-Learn, Keras & TensorFlow_, 2nd Edition, by Aurélien Géron (O'Reilly). COpyright 2019 Kiwisoft S.A.S., 978-1-492-03264-9.](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
+* [2] [Jupyter notebooks](https://github.com/ageron)
+* [3] [Youtube channel](https://www.youtube.com/c/aureliengeron)
+![Hands-on](images/HANDS-OB_ML_BOOK.jpeg)
+### Saving Models
+Ref.[1], p.75
+"You should save every model you experiemnet with ...
+You can easily save Scikit-Learn models by using Python's `pickle` module or by using the `joblib` library, which is more efficient at serializing large NumPy arrays:"
+```
+import joblib
+joblib.dump(my_model, "my_model.pkl")
+# and later ...
+my_model_loaded = joblib.load("my_model.pkl")
+```
 
 ### Cross Validation
 ```python
