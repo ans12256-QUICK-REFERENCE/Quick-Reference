@@ -115,6 +115,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Machine Learning Workflow](#machine-learning-workflow)
     - [References](#references)
     - [Saving Models](#saving-models)
+    - [Confusion Matrix, Accuracy, Precision, Recall, F1 score](#confusion-matrix-accuracy-precision-recall-f1-score)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
     - [Bootstrap](#bootstrap)
@@ -1252,7 +1253,7 @@ df = df.transform(add_2)
 | Content Cell  | Content Cell  |
 
 ### Saving Models
-Ref.[1], p.75
+Ref.[1], p.75:
 "You should save every model you experiemnet with ...
 You can easily save Scikit-Learn models by using Python's `pickle` module or by using the `joblib` library, which is more efficient at serializing large NumPy arrays:"
 ```
@@ -1262,6 +1263,17 @@ joblib.dump(my_model, "my_model.pkl")
 my_model_loaded = joblib.load("my_model.pkl")
 ```
 
+### Confusion Matrix, Accuracy, Precision, Recall, F1 score
+![img](images/HANDS-on-ML-3_2_Confusion.jpg)
+Ref.[1], p. 92:
+Binary classifier "Is MNIST image a 5 or not?" is guaranteed a ***90% accuracy*** if it ALWAYS predicts "not 5", since only 10% of all images are "5"
+[1] p.90 This demonstrates why ***accuracy*** is generally not the preferred performance measure for ***classifiers***, especially when you are dealing with ***skewed datasets*** (i.e., when some classes are much more frequent than others).
+* ***Recall*** is pretty much what percentage of all instances of the class have even been recognized?
+recall=TP/(TP+FN)
+* ***Precision*** of all classified as positive, what percentage was correct?
+precision=TP/(TP+FP)
+"It is often convinient to combine precision and recall into a single metric called ***F1 score***, in particular if you need a simple way to compare two classifiers. The F1 score is the ***harmonic mean***  of precision and recall. Whereas the regular mean treats all valuaes equally, the harmonic mean gives much more weight to low values. ***As a result, the classifier will only get a high F1 score if both recall and precision are high***."
+F1=2*(precision*recall)/(precision + recall)
 ### Cross Validation
 ```python
 # train/test split
