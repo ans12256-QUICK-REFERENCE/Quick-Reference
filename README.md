@@ -1275,6 +1275,14 @@ recall=TP/(TP+FN)
 precision=TP/(TP+FP)
 "It is often convinient to combine precision and recall into a single metric called ***F1 score***, in particular if you need a simple way to compare two classifiers. The F1 score is the ***harmonic mean***  of precision and recall. Whereas the regular mean treats all valuaes equally, the harmonic mean gives much more weight to low values. ***As a result, the classifier will only get a high F1 score if both recall and precision are high***."
 F1=2*(precision*recall)/(precision + recall)
+To compute F1 score, simpy call the `f1_score()` function:
+```
+>>> from sklearn.metrics import f1_score
+>>> f1_score(y_train_5, y_train_pred)
+0.74209
+```
+The F1 score favors classifiers that have similar precision and recall. This is not always what you want: in some contexts you mostly care about precision, and in other contexts you really cre about recall. For example, if you trained your classifier to detect videos that are safe for kids, you would probably prefer a classifier tjat rejects many good videos (low recall) but keps only safe ones (high precision), rather than classifier that has a much higher recall but lets a few really bad videos show up in your product (in such cases, you may even want to add a human pipeline to check the classifier's video selection). On the other hand, suppose you train a classifier to detect shoplifters in surveillance images: it is probably fine if your classifier has only 30% precision as long as it has 99% recall (sure, the security guards will get a few false alerts, but almost all shoplifters will get caught).
+Unfortunately, you can't have it both ways: increasing precision reduces recall, and vice versa. This is called the ***precision/recall trade-off***.
 ### Cross Validation
 ```python
 # train/test split
