@@ -1264,6 +1264,7 @@ my_model_loaded = joblib.load("my_model.pkl")
 ```
 
 ### Confusion Matrix, Accuracy, Precision, Recall, F1 score
+[01/26/2022]
 ![img](images/HANDS-on-ML-3_2_Confusion.jpg)
 Ref.[1], p. 92:
 Binary classifier "Is MNIST image a 5 or not?" is guaranteed a ***90% accuracy*** if it ALWAYS predicts "not 5", since only 10% of all images are "5"
