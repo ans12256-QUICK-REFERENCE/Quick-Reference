@@ -116,6 +116,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [References](#references)
     - [Saving Models](#saving-models)
     - [Confusion Matrix, Accuracy, Precision, Recall, F1 score](#confusion-matrix-accuracy-precision-recall-f1-score)
+    - [Confusion Matrix](#confusion-matrix)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
     - [Bootstrap](#bootstrap)
@@ -1283,6 +1284,17 @@ To compute F1 score, simpy call the `f1_score()` function:
 ```
 The F1 score favors classifiers that have similar precision and recall. This is not always what you want: in some contexts you mostly care about precision, and in other contexts you really cre about recall. For example, if you trained your classifier to detect videos that are safe for kids, you would probably prefer a classifier tjat rejects many good videos (low recall) but keps only safe ones (high precision), rather than classifier that has a much higher recall but lets a few really bad videos show up in your product (in such cases, you may even want to add a human pipeline to check the classifier's video selection). On the other hand, suppose you train a classifier to detect shoplifters in surveillance images: it is probably fine if your classifier has only 30% precision as long as it has 99% recall (sure, the security guards will get a few false alerts, but almost all shoplifters will get caught).
 Unfortunately, you can't have it both ways: increasing precision reduces recall, and vice versa. This is called the ***precision/recall trade-off***.
+### Confusion Matrix
+[01/28/2022]
+Motivation: To use confusion matrix to analyze error rates
+Ref.[1], pp. 103, using MNIST classifier to understand sources of errors:
+
+| Original  | Error Analysis |
+| ------------- | ------------- |
+|Ref.[1], p. 103<br> `plt.matshow(conf_mx, cmap=plt.cm.gray`<br>`plt.show()`  | Ref.[1], p. 104<br>`row_sums = conf_mx.sum(axis=1, keepdims=True`<br>`norm_conf_mx = conf_mx / row_sums`<br> Fill the diagonal with zeros to keep only the errors, and plot the result:<br>`np.fill_diagonal(norm_conf_mx, 0)`<br>`plt.matshow(norm_conf_mx, cpam=plt.cm.gray)`<br>`plt.show()`  |
+| ![img](images/confusion_matrix_plot.png) | ![img](images/confusion_matrix_errors_plot.png) |
+| This confusion matrix looks pretty good, since most images are on the main diagonal, which means that they were classified correctly ...|You can clearly see the kind of errors the classifier makes. ... 5s get classified as 8s quite often ... Analyzing the confusion matrix often gives you insights into ways to improve your classifier. Looking at this plot, it seems that your efforts should be spent on reducing the false 8s. ... |
+
 ### Cross Validation
 ```python
 # train/test split
