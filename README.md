@@ -113,11 +113,12 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Convert string to](#convert-string-to)
     - [df.set_index()](#dfset_index)
     - [df.apply / df.transform](#dfapply--dftransform)
-  - [Machine Learning Workflow](#machine-learning-workflow)
-    - [References](#references)
-    - [Saving Models](#saving-models)
-    - [Confusion Matrix, Accuracy, Precision, Recall, F1 score](#confusion-matrix-accuracy-precision-recall-f1-score)
+- [Machine Learning](#machine-learning)
+  - [References](#references)
+  - [Saving Models](#saving-models)
+  - [Confusion Matrix, Accuracy, Precision, Recall, F1 score](#confusion-matrix-accuracy-precision-recall-f1-score)
     - [Confusion Matrix](#confusion-matrix)
+  - [SVM Support Vector Machines](#svm-support-vector-machines)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
     - [Regularized Linear Models Ridge, Lasso, and Elastic Net](#regularized-linear-models-ridge-lasso-and-elastic-net)
@@ -1250,8 +1251,8 @@ df = df.transform(add_2)
 
 ```
 
-## Machine Learning Workflow
-### References
+# Machine Learning
+## References
 * [1] [_Hands-on Machine Learning with Scikit-Learn, Keras & TensorFlow_, 2nd Edition, by Aurélien Géron (O'Reilly). Copyright 2019 Kiwisoft S.A.S., 978-1-492-03264-9.](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
 * [2] [Jupyter notebooks](https://github.com/ageron)
 * [3] [Youtube channel](https://www.youtube.com/c/aureliengeron)
@@ -1264,7 +1265,7 @@ df = df.transform(add_2)
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
 
-### Saving Models
+## Saving Models
 Ref.[1], p.75:
 "You should save every model you experiemnet with ...
 You can easily save Scikit-Learn models by using Python's `pickle` module or by using the `joblib` library, which is more efficient at serializing large NumPy arrays:"
@@ -1275,7 +1276,7 @@ joblib.dump(my_model, "my_model.pkl")
 my_model_loaded = joblib.load("my_model.pkl")
 ```
 
-### Confusion Matrix, Accuracy, Precision, Recall, F1 score
+## Confusion Matrix, Accuracy, Precision, Recall, F1 score
 [01/26/2022]
 ![img](images/HANDS-on-ML-3_2_Confusion.jpg)
 Ref.[1], p. 92:
@@ -1306,6 +1307,14 @@ Ref.[1], pp. 103, using MNIST classifier to understand sources of errors:
 | ![img](images/confusion_matrix_plot.png) | ![img](images/confusion_matrix_errors_plot.png) |
 | This confusion matrix looks pretty good, since most images are on the main diagonal, which means that they were classified correctly ...|You can clearly see the kind of errors the classifier makes. ... 5s get classified as 8s quite often ... Analyzing the confusion matrix often gives you insights into ways to improve your classifier. Looking at this plot, it seems that your efforts should be spent on reducing the false 8s. ... |
 
+## SVM Support Vector Machines
+[Ref] pp. 153
+*`outlier detection`*
+SVMs are particularly well suited for classification of complex small- or medium-sized datasets.
+... You can think of an SVM classifier as fitting the widest possible street (represented by the parallel dashed lines) between classes. This is called *`large margin classification`*.
+... decision boundaries are fully determined (or *"supported"*) by the instances on the edge of the street. These instances are called the *`support vectors`* (they are circled in Figure 5-1).
+* Figure 5-1. *Large Margin classification*
+![img](images/SVM_large_margin_classification_plot.png)
 ### Cross Validation
 ```python
 # train/test split
