@@ -119,12 +119,15 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Confusion Matrix, Accuracy, Precision, Recall, F1 score](#confusion-matrix-accuracy-precision-recall-f1-score)
     - [Confusion Matrix](#confusion-matrix)
   - [SVM Support Vector Machines](#svm-support-vector-machines)
+    - [Soft Margin Classification](#soft-margin-classification)
+    - [Noninear SVM Classification](#noninear-svm-classification)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
-    - [Regularized Linear Models Ridge, Lasso, and Elastic Net](#regularized-linear-models-ridge-lasso-and-elastic-net)
-      - [Ridge](#ridge)
-      - [Lasso](#lasso)
-      - [Elastic Net](#elastic-net)
+  - [Outlier Detection](#outlier-detection)
+  - [Regularized Linear Models Ridge, Lasso, and Elastic Net](#regularized-linear-models-ridge-lasso-and-elastic-net)
+    - [Ridge](#ridge)
+    - [Lasso](#lasso)
+    - [Elastic Net](#elastic-net)
     - [Bootstrap](#bootstrap)
 - [Sorting Algorithms](#sorting-algorithms)
   - [Bubble Sort](#bubble-sort)
@@ -1260,10 +1263,10 @@ df = df.transform(add_2)
 ![Hands-on](images/HANDS-OB_ML_BOOK.jpeg)</th></tr>
 </table>
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| First Header | Second Header |
+| ------------ | ------------- |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
 
 ## Saving Models
 Ref.[1], p.75:
@@ -1301,11 +1304,11 @@ Unfortunately, you can't have it both ways: increasing precision reduces recall,
 Motivation: To use confusion matrix to analyze error rates
 Ref.[1], pp. 103, using MNIST classifier to understand sources of errors:
 
-| Original  | Error Analysis |
-| ------------- | ------------- |
-|Ref.[1], p. 103<br> `plt.matshow(conf_mx, cmap=plt.cm.gray`<br>`plt.show()`  | Ref.[1], p. 104<br>`row_sums = conf_mx.sum(axis=1, keepdims=True`<br>`norm_conf_mx = conf_mx / row_sums`<br> Fill the diagonal with zeros to keep only the errors, and plot the result:<br>`np.fill_diagonal(norm_conf_mx, 0)`<br>`plt.matshow(norm_conf_mx, cpam=plt.cm.gray)`<br>`plt.show()`  |
-| ![img](images/confusion_matrix_plot.png) | ![img](images/confusion_matrix_errors_plot.png) |
-| This confusion matrix looks pretty good, since most images are on the main diagonal, which means that they were classified correctly ...|You can clearly see the kind of errors the classifier makes. ... 5s get classified as 8s quite often ... Analyzing the confusion matrix often gives you insights into ways to improve your classifier. Looking at this plot, it seems that your efforts should be spent on reducing the false 8s. ... |
+| Original                                                                                                                                 | Error Analysis                                                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ref.[1], p. 103<br> `plt.matshow(conf_mx, cmap=plt.cm.gray`<br>`plt.show()`                                                              | Ref.[1], p. 104<br>`row_sums = conf_mx.sum(axis=1, keepdims=True`<br>`norm_conf_mx = conf_mx / row_sums`<br> Fill the diagonal with zeros to keep only the errors, and plot the result:<br>`np.fill_diagonal(norm_conf_mx, 0)`<br>`plt.matshow(norm_conf_mx, cpam=plt.cm.gray)`<br>`plt.show()`       |
+| ![img](images/confusion_matrix_plot.png)                                                                                                 | ![img](images/confusion_matrix_errors_plot.png)                                                                                                                                                                                                                                                       |
+| This confusion matrix looks pretty good, since most images are on the main diagonal, which means that they were classified correctly ... | You can clearly see the kind of errors the classifier makes. ... 5s get classified as 8s quite often ... Analyzing the confusion matrix often gives you insights into ways to improve your classifier. Looking at this plot, it seems that your efforts should be spent on reducing the false 8s. ... |
 
 ## SVM Support Vector Machines
 [Ref] pp. 153
@@ -1315,6 +1318,20 @@ SVMs are particularly well suited for classification of complex small- or medium
 ... decision boundaries are fully determined (or *"supported"*) by the instances on the edge of the street. These instances are called the *`support vectors`* (they are circled in Figure 5-1).
 * Figure 5-1. *Large Margin classification*
 ![img](images/SVM_large_margin_classification_plot.png)
+SVMs are sensitive to feature scales, as you can see in figure 5-2. ... After feature scaling (e.g., using Scikit-Learn's `StandardScaler`), the decision boundary in the right plot looks much better.
+Figure 5-2. *Sensitivity to feature scales*
+![img](images/SVM_sensitivity_to_feature_scales_plot.png)
+### Soft Margin Classification
+If we strictly impose tht all instances must be off the street and on the right side, this is called *`hard margin classification`*. There are two main issues with hard margin classification. First, it only works if the data is linearly separable. Second, it is sensitive to outliers.
+...
+Figure 5-3 *Hard margin sensitivity to outliers*
+![img](images/SVM_sensitivity_to_outliers_plot.png)
+[Ref. 1], p. 156 *Unlike Logistic Regression Classifiers, SVM classifiers do not output probabilities for each class*
+### Noninear SVM Classification
+[Ref. 1], p. 157
+... left plot in Figure 5-5: it represents a simple dataset with just one feature $x_1$. This dataset is not linearly separable ... But if you add a second feature $x_2$=($x_1)^2$, the resulting 2D dataset is perfectly linearly separable.
+Figure 5-5. *Adding features to make a dataset linearly separable*
+![img](images/SVM_higher_dimensions_plot.png)
 ### Cross Validation
 ```python
 # train/test split
@@ -1323,10 +1340,33 @@ SVMs are particularly well suited for classification of complex small- or medium
 
 ### k-fold Cross Validation
 
-### Regularized Linear Models Ridge, Lasso, and Elastic Net
-#### Ridge
-#### Lasso
-#### Elastic Net
+## Outlier Detection
+[Ref. 1], p.164 *SVMs can also be used for outlier detection; See Scikit-Learn's documentation for more details.*
+[SciKit-Learn 2. Unsupervised Learning, 2.7. Novelty and Outlier Detection](https://scikit-learn.org/stable/modules/outlier_detection.html#outlier-detection)
+* Many applications require being able to decide whether a new observation belongs to the same distribution as existing observations (it is an inlier), or should be considered as different (it is an outlier). Often, this ability is used to clean real data sets. Two important distinctions must be made:
+
+
+| Task | Description |
+|---|---|
+| **outlier detection:** | The training data contains outliers which are defined as observations that are far from the others. Outlier detection estimators thus try to fit the regions where the training data is the most concentrated, ignoring the deviant observations. |
+| **novelty detection** | The training data is not polluted by outliers and we are interested in detecting whether a new observation is an outlier. In this context an outlier is also called a novelty. |
+Outlier detection and novelty detection are both used for anomaly detection, where one is interested in detecting abnormal or unusual observations. Outlier detection is then also known as unsupervised anomaly detection and novelty detection as semi-supervised anomaly detection. In the context of outlier detection, the outliers/anomalies cannot form a dense cluster as available estimators assume that the outliers/anomalies are located in low density regions. On the contrary, in the context of novelty detection, novelties/anomalies can form a dense cluster as long as they are in a low density region of the training data, considered as normal in this context.
+ * *`... outlier detection in high-dimension, or without any assumptions on the distribution of the inlying data is very challenging.`*
+
+The scikit-learn project provides a set of machine learning tools that can be used both for novelty or outlier detection. This strategy is implemented with objects learning in an unsupervised way from the data:
+[2.7.2 Novelty Detection](https://scikit-learn.org/stable/modules/outlier_detection.html#novelty-detection)
+* One-class SVM with non-linear kernel (RBF)
+![img](images/OUTLIERS_01_sphx_glr_plot_oneclass_001.png)
+[2.7.3. Outlier Detection](https://scikit-learn.org/stable/modules/outlier_detection.html#id1)
+One efficient way of performing outlier detection in high-dimensional datasets is to use random forests. The ensemble.IsolationForest ‘isolates’ observations by randomly selecting a feature and then randomly selecting a split value between the maximum and minimum values of the selected feature.
+* 2.7.3.2. Isolation Forest
+![img](images/OUTLIER_02_sphx_glr_plot_isolation_forest_001.png)
+
+
+## Regularized Linear Models Ridge, Lasso, and Elastic Net
+### Ridge
+### Lasso
+### Elastic Net
 Ref. [1], p. 140
 " ... *So when should you use plain Linear Regression (i.e. without any regularization), Ridge, Lasso, or Elastic Net? It is almost always preferrable to have at least a little bit of regularization, so generally you should avoid plain Linear Regression. Ridge is a good default, but if you suspect that only a few features are useful, you should prefer Lasso or Elastic Net because they tend to reduce the useless features's weights down to zero, as we have discussed. In general, Elastic Net is preferred over Lasso because Lasso may behave erratically when number of features is greater than the number of training instances or when seevral features are strongly correlated.
 Here is a short example that uses Scikit-Learn's `ElasticNet` (`l1_ratio` corresponds to the mix ration `r`):*
