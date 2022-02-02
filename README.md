@@ -1341,6 +1341,7 @@ Figure 5-5. *Adding features to make a dataset linearly separable*
 ### k-fold Cross Validation
 
 ## Outlier Detection
+**02/02/2022**
 [Ref. 1], p.164 *SVMs can also be used for outlier detection; See Scikit-Learn's documentation for more details.*
 [SciKit-Learn 2. Unsupervised Learning, 2.7. Novelty and Outlier Detection](https://scikit-learn.org/stable/modules/outlier_detection.html#outlier-detection)
 * Many applications require being able to decide whether a new observation belongs to the same distribution as existing observations (it is an inlier), or should be considered as different (it is an outlier). Often, this ability is used to clean real data sets. Two important distinctions must be made:
