@@ -34,6 +34,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [ROUND to 1000](#round-to-1000)
   - [CASE WHEN](#case-when)
 - [Git](#git)
+  - [How to save Jupyter notebooks from GitHub](#how-to-save-jupyter-notebooks-from-github)
   - [Code on Git in the browser the magic "." ?!](#code-on-git-in-the-browser-the-magic--)
   - [Remote URL](#remote-url)
   - [Merge conflicts](#merge-conflicts)
@@ -119,6 +120,10 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [Confusion Matrix](#confusion-matrix)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
+    - [Regularized Linear Models Ridge, Lasso, and Elastic Net](#regularized-linear-models-ridge-lasso-and-elastic-net)
+      - [Ridge](#ridge)
+      - [Lasso](#lasso)
+      - [Elastic Net](#elastic-net)
     - [Bootstrap](#bootstrap)
 - [Sorting Algorithms](#sorting-algorithms)
   - [Bubble Sort](#bubble-sort)
@@ -411,6 +416,12 @@ WHERE name LIKE 'J%';
 ```
 
 # Git
+## How to save Jupyter notebooks from GitHub
+[Ref](https://stackoverflow.com/questions/45622602/how-to-save-jupyter-notebooks-from-github)
+1) First click on Raw
+2) Then, press ctrl+s to save it as .ipynb (Note that you'll have to manually type '.ipynb' after the file name to make this work, as files from GitHub are saved as text files as default.)
+3) Go to location where you saved .ipynb file
+4) Open file, you will see the code
 ## Code on Git in the browser the magic "." ?!
 ![img](images/Git_Code_Trick.png)
 ![img](images/BEFORE_Git_dot.png)
@@ -1302,6 +1313,21 @@ Ref.[1], pp. 103, using MNIST classifier to understand sources of errors:
 ```
 
 ### k-fold Cross Validation
+
+### Regularized Linear Models Ridge, Lasso, and Elastic Net
+#### Ridge
+#### Lasso
+#### Elastic Net
+Ref. [1], p. 140
+" ... *So when should you use plain Linear Regression (i.e. without any regularization), Ridge, Lasso, or Elastic Net? It is almost always preferrable to have at least a little bit of regularization, so generally you should avoid plain Linear Regression. Ridge is a good default, but if you suspect that only a few features are useful, you should prefer Lasso or Elastic Net because they tend to reduce the useless features's weights down to zero, as we have discussed. In general, Elastic Net is preferred over Lasso because Lasso may behave erratically when number of features is greater than the number of training instances or when seevral features are strongly correlated.
+Here is a short example that uses Scikit-Learn's `ElasticNet` (`l1_ratio` corresponds to the mix ration `r`):*
+```
+>>> from sklearn.linear_model import ElasticNet
+>>> elastic_net = ElasticNet(alpha=0.1, l1_ratio=0.5)
+>>> elastic_net.fit(X,y)
+>>> elastic_net.predict([[1.5]])
+array([1.54333])
+```
 
 ### Bootstrap
 
