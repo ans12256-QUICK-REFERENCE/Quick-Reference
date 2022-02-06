@@ -24,8 +24,12 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [SQL](#sql)
   - [SQL Normalization 1NF, 2NF etc.](#sql-normalization-1nf-2nf-etc)
   - [postgres](#postgres)
+    - [Create database at specific location](#create-database-at-specific-location)
+    - [ERROR:  invalid byte sequence for encoding "UTF8": 0xff](#error--invalid-byte-sequence-for-encoding-utf8-0xff)
+    - [Run sql file from inside psql \i '...'](#run-sql-file-from-inside-psql-i-)
     - [Basic Operations](#basic-operations)
     - [Most common commands](#most-common-commands)
+    - [Extended display](#extended-display)
     - [Examples](#examples)
   - [WHERE ... IN (...)](#where--in-)
   - [WHERE ... LIKE '%string%'](#where--like-string)
@@ -49,6 +53,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Syntax, LaTex](#syntax-latex)
   - [Images](#images)
 - [Bash Scripting](#bash-scripting)
+    - [help for zsh (Esc-h), man](#help-for-zsh-esc-h-man)
     - [make a bash function](#make-a-bash-function)
   - [Terminal tricks](#terminal-tricks)
     - [recall line editing in terminal](#recall-line-editing-in-terminal)
@@ -90,6 +95,9 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [functions to remember](#functions-to-remember)
 - [Numpy](#numpy)
   - [Number of digits to print](#number-of-digits-to-print)
+  - [Useful functions](#useful-functions)
+    - [.ravel() flatten the array](#ravel-flatten-the-array)
+    - [numpy.c_](#numpyc_)
 - [geopy address/zip -> gps converter](#geopy-addresszip---gps-converter)
 - [geopandas GPS plots](#geopandas-gps-plots)
 - [Pandas](#pandas)
@@ -119,11 +127,13 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Confusion Matrix, Accuracy, Precision, Recall, F1 score](#confusion-matrix-accuracy-precision-recall-f1-score)
     - [Confusion Matrix](#confusion-matrix)
   - [SVM Support Vector Machines](#svm-support-vector-machines)
+    - [Feature Scaling](#feature-scaling)
     - [Soft Margin Classification](#soft-margin-classification)
     - [Noninear SVM Classification](#noninear-svm-classification)
     - [Cross Validation](#cross-validation)
     - [k-fold Cross Validation](#k-fold-cross-validation)
-  - [Outlier Detection](#outlier-detection)
+    - [Outlier Detection](#outlier-detection)
+    - [Kernel Trick](#kernel-trick)
   - [Regularized Linear Models Ridge, Lasso, and Elastic Net](#regularized-linear-models-ridge-lasso-and-elastic-net)
     - [Ridge](#ridge)
     - [Lasso](#lasso)
@@ -273,6 +283,79 @@ There should be more elegant ways to force jupyter use correct kernel, datails a
 Database normalization is the process of structuring a database, usually a relational database, in accordance with a series of so-called normal forms in order to reduce data redundancy and improve data integrity. It was first proposed by Edgar F. Codd as part of his relational model.
 Normalization entails organizing the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints. It is accomplished by applying some formal rules either by a process of synthesis (creating a new database design) or decomposition (improving an existing database design).
 ## postgres
+### Create database at specific location
+02/03/2022
+**Motivation**: [Ben Forta 5th Ed. Sams Teach Yourself SQL in 10 Minutes](https://forta.com/books/0135182794/) create database in local directory
+[Ref.](https://www.postgresql.org/docs/current/sql-createtablespace.html):
+```
+(base) alexey_imac@ALEXEYs-iMac dbs % pwd
+/Users/alexey_imac/Documents/Data_Science_Immersive_Galvanize/SQL_Sams_Teach_10min/dbs
+
+(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % psql
+psql (13.5)
+Type "help" for help.
+
+alexey_imac=# CREATE TABLESPACE SQL_Sams_Teach_10min LOCATION '/Users/alexey_imac/Documents/Data_Science_Immersive_Galvanize/SQL_Sams_Teach_10min/dbs';
+CREATE TABLESPACE
+alexey_imac=# \db
+                                                     List of tablespaces
+         Name         |    Owner    |                                        Location
+----------------------+-------------+----------------------------------------------------------------------------------------
+ pg_default           | postgres    |
+ pg_global            | postgres    |
+ sql_sams_teach_10min | alexey_imac | /Users/alexey_imac/Documents/Data_Science_Immersive_Galvanize/SQL_Sams_Teach_10min/dbs
+(3 rows)
+
+alexey_imac=# CREATE DATABASE tysql TABLESPACE=sql_sams_teach_10min;
+CREATE DATABASE
+alexey_imac=# \l
+                                      List of databases
+      Name      |    Owner    | Encoding |   Collate   |    Ctype    |   Access privileges
+----------------+-------------+----------+-------------+-------------+-----------------------
+ Employees      | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ France         | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ Store          | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ World          | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ alexey_imac    | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ fraud_detect   | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ movr           | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ movr_employees | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ postgres       | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0      | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |             |          |             |             | postgres=CTc/postgres
+ template1      | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |             |          |             |             | postgres=CTc/postgres
+ tysql          | alexey_imac | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ ztm            | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+(13 rows)
+
+alexey_imac=# \c tysql
+You are now connected to database "tysql" as user "alexey_imac".
+tysql=#
+```
+### ERROR:  invalid byte sequence for encoding "UTF8": 0xff
+[StackOverflow](https://stackoverflow.com/questions/4867272/invalid-byte-sequence-for-encoding-utf8)
+[PostgreSQL 24.3. Character Set Support](https://www.postgresql.org/docs/current/multibyte.html) - UTF8, but **NO UTF16!**
+```
+(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % file create_copy.sql
+create_copy.sql: Unicode text, UTF-16, little-endian text, with CRLF line terminators
+```
+To convert from UTF-16 to UTF8(use UTF-8 in iconv command, refer `(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % iconv -l`)
+```
+(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % iconv -f UTF-16 -t UTF-8 <create_copy.sql> create_copy_UTF8.sql
+(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % file create_copy_UTF8.sql
+create_copy_UTF8.sql: ASCII text, with CRLF line terminators
+
+```
+### Run sql file from inside psql \i '...'
+```
+tysql=# \i '/Users/alexey_imac/Documents/Data_Science_Immersive_Galvanize/SQL_Sams_Teach_10min/create_copy.sql'
+psql:/Users/alexey_imac/Documents/Data_Science_Immersive_Galvanize/SQL_Sams_Teach_10min/create_copy.sql:1: ERROR:  invalid byte sequence for encoding "UTF8": 0xff
+...
+(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % file create_copy.sql
+create_copy.sql: Unicode text, UTF-16, little-endian text, with CRLF line terminators
+```
+
 ### [Basic Operations](https://www.postgresqltutorial.com/psql-commands/)
 Having made sure postgres server is running, from the terminal type `psql`
 ```
@@ -318,6 +401,7 @@ World=#
 
 ```
 ### Most common commands
+[17 Practical psql Commands That You Don’t Want To Miss](https://www.postgresqltutorial.com/psql-commands/)
 * `\l` list available databases
 * `\c` check connected database or \c dbname to connect to a new
 * `\dt` list available tables
@@ -347,7 +431,50 @@ World=#
 * `show  hba_file;` show location of the configuration file
 * `SELECT pg_reload_conf();` reload configuration file after changes without restarting psql
 * `\q` quit psql
-*
+
+### Extended display
+`\pset format wrapped`
+`\x`
+`\x auto` with `\pset pager off` [is a nice one](https://stackoverflow.com/questions/9604723/alternate-output-format-for-psql).
+```
+tysql=# SELECT cust_id, cust_name, cust_address FROM customers;
+  cust_id   |                     cust_name                      |                    cust_address
+------------+----------------------------------------------------+----------------------------------------------------
+ 1000000001 | Village Toys                                       | 200 Maple Lane
+ 1000000002 | Kids Place                                         | 333 South Lake Drive
+ 1000000003 | Fun4All                                            | 1 Sunny Place
+ 1000000004 | Fun4All                                            | 829 Riverside Drive
+ 1000000005 | The Toy Store                                      | 4545 53rd Street
+(5 rows)
+
+tysql=# \x
+Expanded display is on.
+tysql=# SELECT cust_id, cust_name, cust_address FROM customers;
+-[ RECORD 1 ]+---------------------------------------------------
+cust_id      | 1000000001
+cust_name    | Village Toys
+cust_address | 200 Maple Lane
+-[ RECORD 2 ]+---------------------------------------------------
+cust_id      | 1000000002
+cust_name    | Kids Place
+cust_address | 333 South Lake Drive
+-[ RECORD 3 ]+---------------------------------------------------
+cust_id      | 1000000003
+cust_name    | Fun4All
+cust_address | 1 Sunny Place
+-[ RECORD 4 ]+---------------------------------------------------
+cust_id      | 1000000004
+cust_name    | Fun4All
+cust_address | 829 Riverside Drive
+-[ RECORD 5 ]+---------------------------------------------------
+cust_id      | 1000000005
+cust_name    | The Toy Store
+cust_address | 4545 53rd Street
+
+tysql=#
+
+```
+
 ### Examples
 ```
 World=# \d city
@@ -550,6 +677,24 @@ export PATH="/Users/alexey_imac:$PATH"
 # zsh: command not found: gitadder
 source ~/.bash_profile
 ```
+### help for zsh (Esc-h), man
+
+Traditional UNIX **help** command do not seem to work in MacOS zsh shell:
+```
+(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % help echo
+zsh: command not found: help`
+```
+**man** does work:
+```
+(base) alexey_imac@ALEXEYs-iMac SQL_Sams_Teach_10min % man iconv
+
+ICONV(1) Linux Programmer's Manual ICONV(1)
+NAME
+      iconv - character set conversion
+
+```
+Another way to display help is to type the name of the command, and press `Esc-h` [Credit](https://stackoverflow.com/questions/4405382/how-can-i-read-documentation-about-built-in-zsh-commands)
+
 ### make a bash function
 triple tics ` create a code block, and bash declares language to color code
 ```bash
@@ -923,6 +1068,51 @@ def factorial(n):
 ## Number of digits to print
 [Source](https://numpy.org/doc/stable/reference/generated/numpy.set_printoptions.html)
 `np.set_printoptions(precision=4)`
+## Useful functions
+### .ravel() flatten the array
+02/02/2022
+**Motivation**:
+To make sure matrix is flattened?
+```
+svm_clf2.fit(X, y.ravel())
+...
+yr = y.ravel()
+```
+[numpy doc ref](https://numpy.org/doc/stable/reference/generated/numpy.ravel.html)
+`numpy.ravel(a, order='C')`
+Return a contiguous flattened array.
+
+A 1-D array, containing the elements of the input, is returned. A copy is made only if needed.
+*It is equivalent to reshape(-1, order=order)*
+```
+>>> x = np.array([[1, 2, 3], [4, 5, 6]])
+>>> np.ravel(x)
+array([1, 2, 3, 4, 5, 6])
+...
+>>> x.reshape(-1)
+array([1, 2, 3, 4, 5, 6])
+```
+### numpy.c_
+02/02/2022
+**Motivation**: One of the uses is to insert a column of "1" in front of the matrix of parameters:
+`X_b = np.c_[np.ones((m, 1)), X]  # Add bias input x0=1`
+
+Translates slice objects to concatenation along the second axis.
+
+This is short-hand for np.r_['-1,2,0', index expression], which is useful because of its common occurrence. In particular, arrays will be stacked along their last axis after being upgraded to at least 2-D with 1’s post-pended to the shape (column vectors made out of 1-D arrays).
+
+See also
+column_stack
+Stack 1-D arrays as columns into a 2-D array.
+r_
+For more detailed documentation.
+Examples
+```
+>>> np.c_[np.array([1,2,3]), np.array([4,5,6])]
+array([[1, 4],
+       [2, 5],
+       [3, 6]])
+```
 
 # geopy address/zip -> gps converter
 [geopy](https://pypi.org/project/geopy/)
@@ -1318,7 +1508,10 @@ SVMs are particularly well suited for classification of complex small- or medium
 ... decision boundaries are fully determined (or *"supported"*) by the instances on the edge of the street. These instances are called the *`support vectors`* (they are circled in Figure 5-1).
 * Figure 5-1. *Large Margin classification*
 ![img](images/SVM_large_margin_classification_plot.png)
-SVMs are sensitive to feature scales, as you can see in figure 5-2. ... After feature scaling (e.g., using Scikit-Learn's `StandardScaler`), the decision boundary in the right plot looks much better.
+
+### Feature Scaling
+SVM tends to neglet small features without scaling.
+ASVMs are sensitive to feature scales, as you can see in figure 5-2: in the left plot, the vertical scale is much larger than the horizontal scale, so the widest possible street is close to horizontal. After feature scaling (e.g., using Scikit-Learn's `StandardScaler`), the decision boundary in the right plot looks much better.
 Figure 5-2. *Sensitivity to feature scales*
 ![img](images/SVM_sensitivity_to_feature_scales_plot.png)
 ### Soft Margin Classification
@@ -1340,30 +1533,54 @@ Figure 5-5. *Adding features to make a dataset linearly separable*
 
 ### k-fold Cross Validation
 
-## Outlier Detection
+### Outlier Detection
 **02/02/2022**
+
 [Ref. 1], p.164 *SVMs can also be used for outlier detection; See Scikit-Learn's documentation for more details.*
 [SciKit-Learn 2. Unsupervised Learning, 2.7. Novelty and Outlier Detection](https://scikit-learn.org/stable/modules/outlier_detection.html#outlier-detection)
 * Many applications require being able to decide whether a new observation belongs to the same distribution as existing observations (it is an inlier), or should be considered as different (it is an outlier). Often, this ability is used to clean real data sets. Two important distinctions must be made:
 
 
-| Task | Description |
-|---|---|
+| Task                   | Description                                                                                                                                                                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **outlier detection:** | The training data contains outliers which are defined as observations that are far from the others. Outlier detection estimators thus try to fit the regions where the training data is the most concentrated, ignoring the deviant observations. |
-| **novelty detection** | The training data is not polluted by outliers and we are interested in detecting whether a new observation is an outlier. In this context an outlier is also called a novelty. |
+| **novelty detection**  | The training data is not polluted by outliers and we are interested in detecting whether a new observation is an outlier. In this context an outlier is also called a novelty.                                                                    |
 
 Outlier detection and novelty detection are both used for anomaly detection, where one is interested in detecting abnormal or unusual observations. Outlier detection is then also known as unsupervised anomaly detection and novelty detection as semi-supervised anomaly detection. In the context of outlier detection, the outliers/anomalies cannot form a dense cluster as available estimators assume that the outliers/anomalies are located in low density regions. On the contrary, in the context of novelty detection, novelties/anomalies can form a dense cluster as long as they are in a low density region of the training data, considered as normal in this context.
  * *`... outlier detection in high-dimension, or without any assumptions on the distribution of the inlying data is very challenging.`*
 
 The scikit-learn project provides a set of machine learning tools that can be used both for novelty or outlier detection. This strategy is implemented with objects learning in an unsupervised way from the data:
+
 [2.7.2 Novelty Detection](https://scikit-learn.org/stable/modules/outlier_detection.html#novelty-detection)
 * One-class SVM with non-linear kernel (RBF)
 ![img](images/OUTLIERS_01_sphx_glr_plot_oneclass_001.png)
+
 [2.7.3. Outlier Detection](https://scikit-learn.org/stable/modules/outlier_detection.html#id1)
+
 One efficient way of performing outlier detection in high-dimensional datasets is to use random forests. The ensemble.IsolationForest ‘isolates’ observations by randomly selecting a feature and then randomly selecting a split value between the maximum and minimum values of the selected feature.
+
 * 2.7.3.2. Isolation Forest
+
 ![img](images/OUTLIER_02_sphx_glr_plot_isolation_forest_001.png)
 
+### Kernel Trick
+[Ref. 1], pp. 158, ...
+*Polynomial Kernel*
+Adding polynomial features is simple to implement and can work great with all sorts of Machine Learning algorithms (not just SVMs). That said, at a low polynomial degree, this method cannot deal with very complex datasets, and with a high polynomial degree it creates a huge number of features *(Alexey's comment: $x_i^n*x_j^m$, where i,j one of the features, n, m polynomial powers. Say if there are three (3) features - $x_1, x_2, x_3$, and we consider third degree polynomial, we end up with terms like $x_1^3, x_1^2x_2, x_1x_2^2, x_1, x_2^3, x_3^3x_2^2, etc.$)*, making the model too slow.
+Fortunately, when using SVMs you can apply an almost miraculous mathematical technique called *`kernel trick`*. The kernel trick makes it possible to get the same result as if you had added many polynomial features, even with very high-degree polynomials, without actually having to add them. So there is no combinatorial explosion of the number of features because you don't actually add any features. This trick is implemented by the SVC class.
+```
+from sklearn import SVC
+poly_kernel_svm_clf = Pipeline([
+    ("scaler", StandardScaler()),
+    ("svm_clf", SVC(kernel="poly", degree=3, coef0=1, C=5))
+  ])
+poly_kernel_svm_clf.fit(X,y)
+```
+This code trains an SVM classifier using a third-degree polynomial kernel. It is represented on the left in Figure 5-7.
+* Figure 5-7. *SVM classifiers with a polynomial kernel*
+![img](images/SVM_moons_kernelized_polynomial_svc_plot.png)
+
+A common approach to finding the right hyperparmeter values is to use grid search (see Chapter 2). It is often faster to first do a very coarse grid search, then a finer grid search around the best values found. Having a good sense of what each hyperparameter actually does can help you search in the right part of the hyperparameter space.
 
 ## Regularized Linear Models Ridge, Lasso, and Elastic Net
 ### Ridge
