@@ -402,6 +402,7 @@ World=#
 ```
 ### Most common commands
 [17 Practical psql Commands That You Don’t Want To Miss](https://www.postgresqltutorial.com/psql-commands/)
+* `\?` **help**
 * `\l` list available databases
 * `\c` check connected database or \c dbname to connect to a new
 * `\dt` list available tables
@@ -417,7 +418,6 @@ World=#
 * `Drop database name_of_database;`
 * `Create table name_of_table (name_of_column1 data_type, name_of_column1 data_type,name_of_column1 data_type, …, name_of_columnN data_type,);`
 *
-* \\? help
 * `\du` list users and roles
 * `\s` command history
 * `\timing` trigger on/off timing of the command execution
