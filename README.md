@@ -6,17 +6,20 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 # Table of Contents
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
+- [Generic MacOS](#generic-macos)
+  - [Passwords](#passwords)
+    - [Generate random passwords if Safari does not want to](#generate-random-passwords-if-safari-does-not-want-to)
 - [Things that drive you NUTS !!!](#things-that-drive-you-nuts-)
   - [Safari](#safari)
     - [Safari Print Selection](#safari-print-selection)
     - [Google Docs paste without format](#google-docs-paste-without-format)
   - [Environments](#environments)
-    - [Activate my_environment:](#activate-my_environment)
+    - [Activate my\_environment:](#activate-my_environment)
     - [Check for installed modules:](#check-for-installed-modules)
   - [500: Internal Server Error](#500-internal-server-error)
   - [conda update anaconda error](#conda-update-anaconda-error)
   - [VS Code is using python 2.7 WTF ?!](#vs-code-is-using-python-27-wtf-)
-  - [Jupyter Notebook not saving: '_xsrf' argument missing from post](#jupyter-notebook-not-saving-_xsrf-argument-missing-from-post)
+  - [Jupyter Notebook not saving: '\_xsrf' argument missing from post](#jupyter-notebook-not-saving-_xsrf-argument-missing-from-post)
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [Abbreviations](#abbreviations)
   - [i.i.d.](#iid)
@@ -26,7 +29,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [postgres](#postgres)
     - [Create database at specific location](#create-database-at-specific-location)
     - [ERROR:  invalid byte sequence for encoding "UTF8": 0xff](#error--invalid-byte-sequence-for-encoding-utf8-0xff)
-    - [Run sql file from inside psql \i '...'](#run-sql-file-from-inside-psql-i-)
+    - [Run sql file from inside psql \\i '...'](#run-sql-file-from-inside-psql-i-)
     - [Basic Operations](#basic-operations)
     - [Most common commands](#most-common-commands)
     - [Extended display](#extended-display)
@@ -58,7 +61,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Terminal tricks](#terminal-tricks)
     - [recall line editing in terminal](#recall-line-editing-in-terminal)
 - [Zoom](#zoom)
-  - [!49 Participants](#)
+  - [](#)
 - [Jupyter](#jupyter)
   - [Magic Commands](#magic-commands)
 - [Python](#python)
@@ -70,7 +73,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [built-in functions, keywords and available functions](#built-in-functions-keywords-and-available-functions)
   - [pointing to the same memory check id(x)](#pointing-to-the-same-memory-check-idx)
   - [printing zip()](#printing-zip)
-  - [$1,000,000 not quite 1_000_000](#1000000-not-quite-1_000_000)
+  - [$1,000,000 not quite 1\_000\_000](#1000000-not-quite-1_000_000)
   - [Sound (ref. yoga classifier)](#sound-ref-yoga-classifier)
   - [Timing code in python](#timing-code-in-python)
   - [Timing code in Jupyter](#timing-code-in-jupyter)
@@ -97,8 +100,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Number of digits to print](#number-of-digits-to-print)
   - [Useful functions](#useful-functions)
     - [.ravel() flatten the array](#ravel-flatten-the-array)
-    - [numpy.c_](#numpyc_)
-- [geopy address/zip -> gps converter](#geopy-addresszip---gps-converter)
+    - [numpy.c\_](#numpyc_)
+- [geopy address/zip -\> gps converter](#geopy-addresszip---gps-converter)
 - [geopandas GPS plots](#geopandas-gps-plots)
 - [Pandas](#pandas)
   - [Create Data Frame with specific schema](#create-data-frame-with-specific-schema)
@@ -114,12 +117,12 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
     - [SettingWithCopyWarning:](#settingwithcopywarning)
     - [Complex conditions](#complex-conditions)
     - [Read json series](#read-json-series)
-    - [Syntax matters brackets positions[]](#syntax-matters-brackets-positions)
-    - [Multiindex mess and reset_index()](#multiindex-mess-and-reset_index)
+    - [Syntax matters brackets positions\[\]](#syntax-matters-brackets-positions)
+    - [Multiindex mess and reset\_index()](#multiindex-mess-and-reset_index)
   - [Data Manipulation](#data-manipulation)
     - [Create new column based on dictionary](#create-new-column-based-on-dictionary)
     - [Convert string to](#convert-string-to)
-    - [df.set_index()](#dfset_index)
+    - [df.set\_index()](#dfset_index)
     - [df.apply / df.transform](#dfapply--dftransform)
 - [Machine Learning](#machine-learning)
   - [References](#references)
@@ -635,6 +638,20 @@ If everything else fails, make a copy of your current directory, do `git reset -
 Configuring credential.helper: On OS X (now macOS), run this in Terminal:
 `git config --global credential.helper osxkeychain`
 When pushing/pulling for the first time after that, reply always in keychain popup window
+
+* **04-19-2023 update** [github documentation](https://docs.github.com/en/get-started/getting-started-with-git/updating-credentials-from-the-macos-keychain) ... "Note: Updating credentials from the macOS Keychain only applies to users who manually configured a personal access token using the osxkeychain helper that is built-in to macOS.
+
+We recommend you either configure SSH or upgrade to the Git Credential Manager (GCM) instead. GCM can manage authentication on your behalf (no more manual personal access tokens) including 2FA (two-factor auth)."
+
+```
+% conda update git
+...
+% git --version
+git version 2.34.1
+
+% conda install -c conda-forge git-credential-manager
+
+```
 ## Quick reference
 * create new repository on githup, copy address and run in local directory git pull "GitHub URL"
 * mess with data locally, then in local terminal run the following:
