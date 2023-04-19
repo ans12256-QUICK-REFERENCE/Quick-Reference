@@ -165,6 +165,15 @@ $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 * VirtualBoxVM on MacOS for Ubuntu installation instructions:
 [Step-by-Step info for MacOS](https://siytek.com/ubuntu-mac-virtualbox/)
 
+# Generic MacOS
+## Passwords
+### Generate random passwords if Safari does not want to
+[YouTube MacMostVideo Credit](https://youtu.be/v37C6KJmDGE)
+* Keychain - "New Password Item" Ctrl+N, click a small key icon to open a "Password Assistant" window, select type and length with the strength feedback
+* **Terminal #1** - `% date | md5` creates a checksum from date output that looks something like `Wed Apr 19 11:45:01 PDT 2023` "piped" via "|" into something like `61fc3f1aa0105adca93129b4e3fc4dc0`. Use the whole output or a portion of it as a new assword. <br /> _man md5_ or _man date_ would provide more details about commands used.
+* **Terminal #2** - `% openssl rand -base64 6` could output something like `2G9x7rqj`. Replacing last number in the command shown above with say 16 (instead of 6) could generate a longer output that could look like `k7OcXeAbL/ll31xcA+IBqw==`
+* **Terminal #3** - `% cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9-_\$' | fold -w 8 | sed 1q` could output something like `PBPvKFV8`. In command string above, `8` is the length of the password, `\$` is used to specify dollar sign as one of the characters to possibly used in the password (not sure why `\` in front of the `$` is required, but apparently it is), as well as dash and underscore `-_`.
+* Use of `Automator` to create an `Action` for commands shown above is possible, but is it really necessary?
 # Things that drive you NUTS !!!
 ## Safari
 ### Safari Print Selection
