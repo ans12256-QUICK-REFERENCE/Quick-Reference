@@ -23,6 +23,11 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Jupyter import error of installed module](#jupyter-import-error-of-installed-module)
 - [Abbreviations](#abbreviations)
   - [i.i.d.](#iid)
+- [Full-Stack](#full-stack)
+  - [Django](#django)
+  - [Wagtail](#wagtail)
+    - [kill localhost:8000 server](#kill-localhost8000-server)
+    - ["Normal steps"](#normal-steps)
 - [STATISTICS](#statistics)
 - [SQL](#sql)
   - [SQL Normalization 1NF, 2NF etc.](#sql-normalization-1nf-2nf-etc)
@@ -287,6 +292,33 @@ There should be more elegant ways to force jupyter use correct kernel, datails a
 ## i.i.d.
 [independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)
 * In probability theory and statistics, a collection of random variables is independent and identically distributed if each random variable has the same probability distribution as the others and all are mutually independent.[1] This property is usually abbreviated as i.i.d. or iid or IID. Herein, i.i.d. is used, because it is the most prevalent.
+# Full-Stack
+## Django
+## Wagtail
+### kill localhost:8000 server
+**Motivation**: If due to whatever disruption (say VSC restart), there is a "loose server" running on 8000 port, meaning there is no server ^Ctrl+C option available in the terminal, and attempts to launch a new one result in error (<font color='red'> ERROR: That port is already in use </font>), manual deletion of the serveris required in the terminal.
+[Stackoverflow credit: Mounir No. 17, 2015](https://stackoverflow.com/questions/20239232/django-server-error-port-is-already-in-use)
+For osx users you can use <br/> `sudo lsof -t -i tcp:8000 | xargs kill -9`
+### "Normal steps"
+* Create environment for the project, install wagtail <br/>`(base) alexey_imac@ALEXEYs-iMac LESSONS %python -m venv learn_wagtail`
+* Activate environment, perform basic checks <br/>
+  * `(base) alexey_imac@ALEXEYs-iMac LESSONS % . learn_wagtail/bin/activate`<br/>
+  * `(learn_wagtail) (base) alexey_imac@ALEXEYs-iMac LESSONS %`<br/>
+  * `which python3`
+  * `python3 -V`
+  * in VSC Command Pallete (Shift+Command+P) make sure `Python:Select Interpreter` is the same as shown in previous commands
+* Install wagtail `pip install wagtail`
+* Check installation `pip show wagtail` or `pip freeze`
+* from the terminal start a wagtail project `wagtail start my_first_wagtail_project` hopefully you'll see "Success! my_first ... has been created."
+* From the terminal `pip install -r requirements.txt`, and ...
+* Run the server `python manage.py runserver 0:8000` If "Do you want the application "python 3.8" to accept incoming network connections" pops up ... well I replied yes.
+* ^Ctrl+C to stop the server. If you messed up, refer above how to manually kill the server.
+* If in the browser at URL `localhost:8000` you will (among other things) see `Operational Error at/ ...`<br/>`no such column: home_homepage.whatever was added`
+* No to worry make wagtail/Django update database:<br/>`%python`
+*
+
+
+
 # STATISTICS
 
 # SQL
