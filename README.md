@@ -28,6 +28,8 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
   - [Wagtail](#wagtail)
     - [kill localhost:8000 server](#kill-localhost8000-server)
     - ["Normal steps"](#normal-steps)
+- [VSC Visual Studio Code](#vsc-visual-studio-code)
+  - [Two (2) Workspaces/projects in one window](#two-2-workspacesprojects-in-one-window)
 - [STATISTICS](#statistics)
 - [SQL](#sql)
   - [SQL Normalization 1NF, 2NF etc.](#sql-normalization-1nf-2nf-etc)
@@ -313,11 +315,20 @@ For osx users you can use <br/> `sudo lsof -t -i tcp:8000 | xargs kill -9`
 * From the terminal `pip install -r requirements.txt`, and ...
 * Run the server `python manage.py runserver 0:8000` If "Do you want the application "python 3.8" to accept incoming network connections" pops up ... well I replied yes.
 * ^Ctrl+C to stop the server. If you messed up, refer above how to manually kill the server.
-* If in the browser at URL `localhost:8000` you will (among other things) see `Operational Error at/ ...`<br/>`no such column: home_homepage.whatever was added`
-* No to worry make wagtail/Django update database:<br/>`%python`
+* If after adding fields in the page browser at URL `localhost:8000` you will (among other things) see `Operational Error at/ ...`<br/>`no such column: home_homepage.whatever was added`
+* No to worry make wagtail/Django update the database:<br/>`%python manage.py makemigrations`
+* Database restructuring syntax could be found in the VSC project `home/migrations/0003_auto_date_time.py`
+* To finalize, perform actual migration by applying these database changes by `python manage.py migrate` the last line of the terminal output would hopefully read `Running migrations:` <br/>   `Applying home.0003_auto_date_time.py... OK`
+* and restart server by `python manage.py runserver 0:8000`
+* After making all the adits, and publishing, nothing seems to be changing at localhost:8000. In VSC go to `home\templates\home\home_page.html`
 *
 
-
+# VSC Visual Studio Code
+## Two (2) Workspaces/projects in one window
+June 1, 2023
+**Motivation**: Work on a project, and document "lessons learned" concurrently in the "Quick-Reference" project.
+Load the current project or "Workspace", then add Window-->New Tab, and load "Quick Reference" in there. Nowyou would only have to switch VSC tabs to go back and forth, or even create a shortcut for switching tabs.
+![Two (2) Project in one VSC window](images/VSCode_two_2_projects_in_one_1_window.png)
 
 # STATISTICS
 
@@ -685,6 +696,7 @@ git version 2.34.1
 
 ```
 ## Quick reference
+* Cloning somebody else's repository [Ref.](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 * create new repository on githup, copy address and run in local directory git pull "GitHub URL"
 * mess with data locally, then in local terminal run the following:
 * git status
