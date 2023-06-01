@@ -325,9 +325,9 @@ For osx users you can use <br/> `sudo lsof -t -i tcp:8000 | xargs kill -9`
 
 # VSC Visual Studio Code
 ## Two (2) Workspaces/projects in one window
-June 1, 2023
+June 1, 2023 <br />
 **Motivation**: Work on a project, and document "lessons learned" concurrently in the "Quick-Reference" project.
-Load the current project or "Workspace", then add Window-->New Tab, and load "Quick Reference" in there. Nowyou would only have to switch VSC tabs to go back and forth, or even create a shortcut for switching tabs.
+Load the current project or "Workspace", then add Window-->New Tab, and load "Quick Reference" in there. Now you would only have to switch VSC tabs to go back and forth, or even create a shortcut for switching tabs.
 ![Two (2) Project in one VSC window](images/VSCode_two_2_projects_in_one_1_window.png)
 
 # STATISTICS
