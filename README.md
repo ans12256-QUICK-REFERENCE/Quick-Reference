@@ -6,6 +6,10 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 # Table of Contents
 - [Table of Contents](#table-of-contents)
   - [Relevant Links](#relevant-links)
+- [Random interesting stuff](#random-interesting-stuff)
+  - [import this Zen of Python](#import-this-zen-of-python)
+  - [Software life cycle](#software-life-cycle)
+    - [Source Code Escrow, Abandonware](#source-code-escrow-abandonware)
 - [Generic MacOS](#generic-macos)
   - [Passwords](#passwords)
     - [Generate random passwords if Safari does not want to](#generate-random-passwords-if-safari-does-not-want-to)
@@ -72,6 +76,7 @@ DSI_Galvanize_May_17_2021 Notes for DSI Galvanize
 - [Jupyter](#jupyter)
   - [Magic Commands](#magic-commands)
 - [Python](#python)
+  - [\*args and \*\*kwargs](#args-and-kwargs)
   - [print tricks no new line etc.](#print-tricks-no-new-line-etc)
     - [Escape apostrophe](#escape-apostrophe)
     - [No new line, separator](#no-new-line-separator)
@@ -175,6 +180,38 @@ $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 * VirtualBoxVM on MacOS for Ubuntu installation instructions:
 [Step-by-Step info for MacOS](https://siytek.com/ubuntu-mac-virtualbox/)
 
+# Random interesting stuff
+## import this Zen of Python
+[Ref.](https://realpython.com/zen-of-python/)
+```
+>>> import this
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+## Software life cycle
+### Source Code Escrow, Abandonware
+[Source Code Escrow](https://en.wikipedia.org/wiki/Source_code_escrow)
+[Abandonware](https://en.wikipedia.org/wiki/Abandonware)
+[Orphan work](https://en.wikipedia.org/wiki/Orphan_work)
 # Generic MacOS
 ## Passwords
 ### Generate random passwords if Safari does not want to
@@ -842,6 +879,33 @@ alpha      int         123
 beta       str         test
 ```
 # Python
+## *args and **kwargs
+[Ref.](https://realpython.com/python-kwargs-and-args/)
+In a nutshell, * unpacks any iterable into a tuple, while ** unpacks dictionaries
+```# correct_function_definition.py
+def my_function(a, b, *args, **kwargs):
+    pass
+
+# sum_integers_args.py
+def my_sum(*args):
+    result = 0
+    # Iterating over the Python args tuple
+    for x in args:
+        result += x
+    return result
+
+print(my_sum(1, 2, 3))
+
+# concatenate.py
+def concatenate(**kwargs):
+    result = ""
+    # Iterating over the Python kwargs dictionary
+    for arg in kwargs.values():
+        result += arg
+    return result
+
+print(concatenate(a="Real", b="Python", c="Is", d="Great", e="!"))
+```
 ## print tricks no new line etc.
 ### Escape apostrophe
 `print('we\'re done')`
